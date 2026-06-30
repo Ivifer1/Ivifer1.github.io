@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivifer Pita | Data Engineer</title>
+    <meta name="description" content="Portafolio de Ingeniería de Datos - ETL, Data Pipelines, Airflow, Python">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">ivifer<span>.dev</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#proyecto">Proyecto</a></li>
+                <li><a href="#stack">Stack</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="inicio" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <p class="hero-subtitle">Hola, soy</p>
+                <h1 class="hero-title">Ivifer Pita</h1>
+                <h2 class="hero-role">Data Engineer</h2>
+                <p class="hero-description">
+                    Construyo pipelines de datos end-to-end con Python, Apache Airflow y PostgreSQL. 
+                    Especializado en ETL, orquestación con Docker y visualización de métricas de negocio.
+                </p>
+                <div class="hero-cta">
+                    <a href="#proyecto" class="btn btn-primary">Ver Proyecto</a>
+                    <a href="https://github.com/Ivifer1" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/ivifer-pita-322527380/" target="_blank" class="btn btn-outline">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#sobre-mi"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mí</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        Ingeniero de datos en formación con experiencia práctica en el diseño y construcción 
+                        de <strong>pipelines ETL completos</strong>. Mi enfoque combina buenas prácticas de 
+                        ingeniería de software —como tests unitarios y contenerización con Docker— con 
+                        herramientas modernas de procesamiento de datos.
+                    </p>
+                    <p>
+                        He desarrollado un proyecto end-to-end que abarca extracción de APIs REST, 
+                        transformación con Pandas, carga a PostgreSQL, orquestación con Apache Airflow 
+                        y visualización con Metabase, todo desplegado mediante Docker Compose.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Proyecto ETL<br>end-to-end</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">6+</span>
+                            <span class="stat-label">Servicios<br>en Docker</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Capas de<br>datos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="code-window">
+                        <div class="code-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                            <span class="code-title">ecommerce_pipeline.py</span>
+                        </div>
+                        <div class="code-body">
+<pre><code><span class="code-kw">from</span> airflow <span class="code-kw">import</span> DAG
+<span class="code-kw">from</span> airflow.operators.python <span class="code-kw">import</span> PythonOperator
+<span class="code-kw">from</span> scripts.extract <span class="code-kw">import</span> extract_data
+<span class="code-kw">from</span> scripts.transform <span class="code-kw">import</span> transform_data
+<span class="code-kw">from</span> scripts.load <span class="code-kw">import</span> load_data
+
+<span class="code-kw">with</span> DAG(
+    dag_id=<span class="code-str">'ecommerce_pipeline'</span>,
+    schedule=<span class="code-str">'@daily'</span>,
+    <span class="code-kw">default_args</span>=default_args
+) <span class="code-kw">as</span> dag:
+    
+    extract = PythonOperator(
+        task_id=<span class="code-str">'extract'</span>,
+        python_callable=extract_data
+    )
+    
+    transform = PythonOperator(
+        task_id=<span class="code-str">'transform'</span>,
+        python_callable=transform_data
+    )
+    
+    load = PythonOperator(
+        task_id=<span class="code-str">'load'</span>,
+        python_callable=load_data
+    )
+    
+    extract >> transform >> load</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyecto Destacado -->
+    <section id="proyecto" class="project">
+        <div class="container">
+            <div class="project-header">
+                <span class="project-badge-main">Proyecto Destacado</span>
+                <h2 class="section-title">E-Commerce Data Pipeline</h2>
+                <p class="project-subtitle">
+                    Pipeline ETL end-to-end con extracción de API REST, transformación con Pandas, 
+                    carga a PostgreSQL y orquestación con Apache Airflow en Docker.
+                </p>
+            </div>
+
+            <!-- Arquitectura Visual -->
+            <div class="architecture-section">
+                <h3 class="subsection-title"><i class="fas fa-sitemap"></i> Arquitectura</h3>
+                <div class="architecture-flow">
+                    <div class="arch-node">
+                        <div class="arch-icon"><i class="fas fa-cloud"></i></div>
+                        <span class="arch-label">Fake Store API</span>
+                        <span class="arch-desc">Fuente de datos</span>
+                    </div>
+                    <div class="arch-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="arch-node active">
+                        <div class="arch-icon"><i class="fab fa-python"></i></div>
+                        <span class="arch-label">Python + Pandas</span>
+                        <span class="arch-desc">Transformación</span>
+                    </div>
+                    <div class="arch-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="arch-node">
+                        <div class="arch-icon"><i class="fas fa-database"></i></div>
+                        <span class="arch-label">PostgreSQL</span>
+                        <span class="arch-desc">Raw + Data Mart</span>
+                    </div>
+                    <div class="arch-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="arch-node">
+                        <div class="arch-icon"><i class="fas fa-chart-bar"></i></div>
+                        <span class="arch-label">Metabase</span>
+                        <span class="arch-desc">Dashboard</span>
+                    </div>
+                </div>
+                <div class="orchestrator-badge">
+                    <i class="fas fa-wind"></i> Apache Airflow orquesta todo el flujo
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-download"></i></div>
+                    <h4>Extracción</h4>
+                    <p>Consumo de API REST pública (Fake Store API) para obtener productos, usuarios y pedidos en formato JSON.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-broom"></i></div>
+                    <h4>Transformación</h4>
+                    <p>Limpieza y normalización con <strong>Pandas</strong>: tipos de datos, eliminación de duplicados, manejo de nulos y validaciones.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-upload"></i></div>
+                    <h4>Carga</h4>
+                    <p>Inserción eficiente en <strong>PostgreSQL</strong> mediante SQLAlchemy y Psycopg2, con esquemas normalizados y data mart.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-wind"></i></div>
+                    <h4>Orquestación</h4>
+                    <p>DAG en <strong>Apache Airflow</strong> con dependencias definidas (extract → transform → load) y ejecución programada.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-vial"></i></div>
+                    <h4>Testing</h4>
+                    <p>Suite de <strong>tests unitarios</strong> con pytest para cada etapa del pipeline, garantizando calidad y robustez.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                    <h4>Visualización</h4>
+                    <p>Dashboard interactivo en <strong>Metabase</strong> conectado a PostgreSQL: distribución de ratings, precios por categoría y más.</p>
+                </div>
+            </div>
+
+            <!-- Tech Stack del Proyecto -->
+            <div class="project-tech-section">
+                <h3 class="subsection-title"><i class="fas fa-layer-group"></i> Stack Tecnológico</h3>
+                <div class="tech-badges">
+                    <span class="tech-badge"><i class="fab fa-python"></i> Python 3.9+</span>
+                    <span class="tech-badge"><i class="fas fa-table"></i> Pandas</span>
+                    <span class="tech-badge"><i class="fas fa-wind"></i> Apache Airflow 2.7+</span>
+                    <span class="tech-badge"><i class="fas fa-database"></i> PostgreSQL 15</span>
+                    <span class="tech-badge"><i class="fas fa-flask"></i> SQLAlchemy</span>
+                    <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
+                    <span class="tech-badge"><i class="fab fa-docker"></i> Docker Compose</span>
+                    <span class="tech-badge"><i class="fas fa-chart-bar"></i> Metabase</span>
+                    <span class="tech-badge"><i class="fas fa-vial"></i> Pytest</span>
+                    <span class="tech-badge"><i class="fas fa-network-wired"></i> Requests</span>
+                </div>
+            </div>
+
+            <!-- Dashboard Preview -->
+            <div class="dashboard-section">
+                <h3 class="subsection-title"><i class="fas fa-desktop"></i> Dashboard</h3>
+                <div class="dashboard-preview">
+                    <img src="assets/images/dashboard_overview.png" alt="Dashboard E-Commerce" class="dashboard-img">
+                </div>
+                <div class="dashboard-metrics">
+                    <div class="metric">
+                        <i class="fas fa-star"></i>
+                        <span>Distribución de Ratings</span>
+                    </div>
+                    <div class="metric">
+                        <i class="fas fa-tags"></i>
+                        <span>Precio Promedio por Categoría</span>
+                    </div>
+                    <div class="metric">
+                        <i class="fas fa-boxes"></i>
+                        <span>Productos por Categoría</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Links -->
+            <div class="project-links">
+                <a href="https://github.com/Ivifer1/ecommerce-data-pipeline" target="_blank" class="btn btn-primary btn-large">
+                    <i class="fab fa-github"></i> Ver Código en GitHub
+                </a>
+                <a href="https://github.com/Ivifer1/ecommerce-data-pipeline#arquitectura-del-proyecto" target="_blank" class="btn btn-outline btn-large">
+                    <i class="fas fa-book"></i> Ver Documentación
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stack General -->
+    <section id="stack" class="stack">
+        <div class="container">
+            <h2 class="section-title">Habilidades Técnicas</h2>
+            <div class="stack-grid">
+                <div class="stack-category">
+                    <h3><i class="fas fa-code"></i> Lenguajes</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="fab fa-python"></i> Python</span>
+                        <span class="stack-item"><i class="fas fa-database"></i> SQL</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3><i class="fas fa-cogs"></i> Procesamiento</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="fas fa-table"></i> Pandas</span>
+                        <span class="stack-item"><i class="fas fa-wind"></i> Apache Airflow</span>
+                        <span class="stack-item"><i class="fas fa-flask"></i> SQLAlchemy</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3><i class="fas fa-server"></i> Bases de Datos</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="fas fa-database"></i> PostgreSQL</span>
+                        <span class="stack-item"><i class="fas fa-file-code"></i> SQL</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3><i class="fas fa-cloud"></i> DevOps & Cloud</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="fab fa-docker"></i> Docker</span>
+                        <span class="stack-item"><i class="fab fa-docker"></i> Docker Compose</span>
+                        <span class="stack-item"><i class="fab fa-git-alt"></i> Git</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3><i class="fas fa-chart-line"></i> Visualización</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="fas fa-chart-bar"></i> Metabase</span>
+                    </div>
+                </div>
+                <div class="stack-category">
+                    <h3><i class="fas fa-check-circle"></i> Testing</h3>
+                    <div class="stack-items">
+                        <span class="stack-item"><i class="fas fa-vial"></i> Pytest</span>
+                        <span class="stack-item"><i class="fas fa-bug"></i> Unit Testing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            <p class="contact-text">
+                ¿Tienes una oportunidad o quieres conversar sobre datos? 
+                <br>Estoy abierto a roles de Data Engineering Junior y proyectos colaborativos.
+            </p>
+            <div class="contact-links">
+                <a href="mailto:iviferpita@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>iviferpita@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/ivifer-pita-322527380/" target="_blank" class="contact-link">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/Ivifer1" target="_blank" class="contact-link">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© <span id="year"></span> Ivifer Pita. Construido con datos y mucho café ☕</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
