@@ -1,65 +1,81 @@
-// Año dinámico
-document.getElementById('year').textContent = new Date().getFullYear();
+// Typing effect
+const phrases = [
+    "ETL Pipelines",
+    "Data Orchestration", 
+    "Docker Containers",
+    "PostgreSQL Warehouses"
+];
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingElement = document.getElementById('typingText');
 
-// Navbar scroll effect
-const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-    navbar.style.background = window.scrollY > 50 
-        ? 'rgba(15, 23, 42, 0.98)' 
-        : 'rgba(15, 23, 42, 0.95)';
-});
+function typeEffect() {
+    const current = phrases[phraseIndex];
+    
+    if (isDeleting) {
+        typingElement.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typingElement.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+    }
+    
+    let typeSpeed = isDeleting ? 60 : 100;
+    
+    if (!isDeleting && charIndex === current.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500;
+    }
+    
+    setTimeout(typeEffect, typeSpeed);
+}
 
 // Mobile menu
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.querySelector('.sidebar');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navLinks.classList.toggle('active');
+menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
 });
 
-// Cerrar menú al hacer click en un link
-document.querySelectorAll('.nav-links a').forEach(link => {
+// Close sidebar when clicking a link (mobile)
+document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navLinks.classList.remove('active');
-    });
-});
-
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.innerWidth <= 900) {
+            sidebar.classList.remove('open');
         }
     });
 });
 
-// Intersection Observer para animaciones
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// Active nav link on scroll
+const sections = document.querySelectorAll('section, article');
+const navLinks = document.querySelectorAll('.nav-link');
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
         }
     });
-}, observerOptions);
-
-// Animar elementos
-const animatedElements = document.querySelectorAll(
-    '.feature-card, .stack-category, .arch-node, .about-text, .code-window'
-);
-
-animatedElements.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === current) {
+            link.classList.add('active');
+        }
+    });
 });
+
+// Year in footer
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// Start typing
+document.addEventListener('DOMContentLoaded', typeEffect);
