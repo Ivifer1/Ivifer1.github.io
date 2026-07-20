@@ -1,9 +1,9 @@
 // Typing effect
 const phrases = [
     "ETL Pipelines",
-    "Data Orchestration", 
-    "Docker Containers",
-    "PostgreSQL Warehouses"
+    "Data Warehouses",
+    "AWS Cloud",
+    "Docker Containers"
 ];
 let phraseIndex = 0;
 let charIndex = 0;
@@ -12,7 +12,7 @@ const typingElement = document.getElementById('typingText');
 
 function typeEffect() {
     const current = phrases[phraseIndex];
-    
+
     if (isDeleting) {
         typingElement.textContent = current.substring(0, charIndex - 1);
         charIndex--;
@@ -20,9 +20,9 @@ function typeEffect() {
         typingElement.textContent = current.substring(0, charIndex + 1);
         charIndex++;
     }
-    
+
     let typeSpeed = isDeleting ? 60 : 100;
-    
+
     if (!isDeleting && charIndex === current.length) {
         typeSpeed = 2000;
         isDeleting = true;
@@ -31,7 +31,7 @@ function typeEffect() {
         phraseIndex = (phraseIndex + 1) % phrases.length;
         typeSpeed = 500;
     }
-    
+
     setTimeout(typeEffect, typeSpeed);
 }
 
@@ -65,7 +65,7 @@ window.addEventListener('scroll', () => {
             current = section.getAttribute('id');
         }
     });
-    
+
     navLinks.forEach(link => {
         link.classList.remove('active');
         if (link.getAttribute('data-section') === current) {

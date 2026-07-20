@@ -518,6 +518,12 @@ section { padding: 80px 60px; max-width: 1000px; }
     justify-content: center;
 }
 
+/* AWS Flow specific */
+.aws-flow .arch-step {
+    min-width: 110px;
+    padding: 16px;
+}
+
 /* Features */
 .project-features {
     display: grid;
@@ -688,6 +694,34 @@ section { padding: 80px 60px; max-width: 1000px; }
     color: var(--text-muted);
 }
 
+/* ===== Mobile Menu ===== */
+.nav-links.active {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--dark);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    z-index: 999;
+}
+.nav-links.active a {
+    font-size: 1.5rem;
+}
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
     .sidebar {
@@ -708,6 +742,8 @@ section { padding: 80px 60px; max-width: 1000px; }
     .arch-source-group { flex-direction: row; }
     .main-footer { padding: 30px 24px; }
     .footer-content { flex-direction: column; text-align: center; }
+    .aws-flow { flex-direction: column; }
+    .aws-flow .arch-conn { transform: rotate(90deg); }
 }
 
 @media (max-width: 600px) {
@@ -717,4 +753,5 @@ section { padding: 80px 60px; max-width: 1000px; }
     .section-title { font-size: 1.5rem; }
     .btn { width: 100%; justify-content: center; }
     .hero-actions { flex-direction: column; }
+    .project-features { grid-template-columns: 1fr; }
 }
