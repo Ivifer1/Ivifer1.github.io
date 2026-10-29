@@ -1,0 +1,1939 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rollback · Proyecto de branding · Ivifer Pita</title>
+<meta name="description" content="Rollback, la cafetería transaccional. Proyecto de branding: identidad, look &amp; feel y plan de medios digitales.">
+<meta name="author" content="Ivifer Pita">
+<meta property="og:title" content="Rollback · Proyecto de branding">
+<meta property="og:description" content="Si el día falla, haz rollback.">
+<link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 120 120&#x27;&gt;&lt;rect width=&#x27;120&#x27; height=&#x27;120&#x27; rx=&#x27;28&#x27; fill=&#x27;%2324170F&#x27;/&gt;&lt;g transform=&#x27;translate(40 2) scale(1.5)&#x27; fill=&#x27;none&#x27; stroke=&#x27;%2334D27B&#x27; stroke-width=&#x27;2.6&#x27; stroke-linecap=&#x27;round&#x27; stroke-linejoin=&#x27;round&#x27;&gt;&lt;path d=&#x27;M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8&#x27;/&gt;&lt;path d=&#x27;M3 3v5h5&#x27;/&gt;&lt;/g&gt;&lt;path d=&#x27;M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z&#x27; fill=&#x27;%23F4EBDD&#x27;/&gt;&lt;path d=&#x27;M90 58Q106 58 106 70Q106 82 90 82&#x27; fill=&#x27;none&#x27; stroke=&#x27;%23F4EBDD&#x27; stroke-width=&#x27;7&#x27; stroke-linecap=&#x27;round&#x27;/&gt;&lt;path d=&#x27;M18 108H98&#x27; stroke=&#x27;%23F4EBDD&#x27; stroke-width=&#x27;6&#x27; stroke-linecap=&#x27;round&#x27;/&gt;&lt;/svg&gt;">
+<style>
+@font-face{font-family:'JetBrains Mono';src:url(fonts/JetBrainsMono.ttf) format('truetype');font-weight:100 800;font-display:block}
+@font-face{font-family:'DM Sans';src:url(fonts/DMSans.ttf) format('truetype');font-weight:100 1000;font-display:block}
+@font-face{font-family:'Caveat';src:url(fonts/Caveat.ttf) format('truetype');font-weight:400 700;font-display:block}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#120B07;overflow:hidden;-webkit-font-smoothing:antialiased}
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:#24170F}
+.slide{position:absolute;left:0;top:0;width:1920px;height:1080px;visibility:hidden;opacity:0}
+.slide>*{position:relative}
+.slide.on{visibility:visible;opacity:1;transition:opacity .45s ease}
+.slide.on.push{animation:pushin .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes pushin{from{transform:translateX(160px);opacity:0}to{transform:none;opacity:1}}
+h1{font-size:96px;font-weight:600;line-height:1.1}
+h2{font-size:64px;font-weight:600;line-height:1.15}
+h3{font-size:44px;font-weight:600;line-height:1.2}
+p{font-size:32px;line-height:1.4}
+ul,ol{padding-left:1.2em}
+table{border-collapse:collapse;width:100%}
+th,td{padding:.35em .6em;text-align:left;border-bottom:1px solid rgba(128,112,96,.35)}
+th{font-weight:700}
+hr{border:0;width:100%}
+a{color:inherit}
+aside{display:none}
+.xi{display:inline-block;flex:none}
+.xi svg{width:100%;height:100%;display:block}
+.clip{display:block;cursor:pointer;background:#24170F}
+.on .bi{animation:rise .8s cubic-bezier(.2,.8,.2,1) .25s both}
+@keyframes rise{from{opacity:0;transform:translateY(48px)}to{opacity:1;transform:none}}
+#ui{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:6px;align-items:center;background:rgba(26,16,10,.86);border:1px solid #4A3527;border-radius:999px;padding:6px 8px;font:500 14px 'JetBrains Mono',monospace;color:#F4EBDD;transition:opacity .4s;z-index:5}
+#ui button{all:unset;cursor:pointer;padding:7px 12px;border-radius:999px;color:#F4EBDD}
+#ui button:hover,#ui button:focus-visible{background:#3A2619}
+#ui .n{padding:0 8px;color:#BFAE98;min-width:70px;text-align:center}
+body.idle #ui{opacity:0}
+body.idle{cursor:none}
+#notes{position:fixed;left:50%;bottom:76px;transform:translateX(-50%);width:min(880px,92vw);background:rgba(26,16,10,.94);color:#F4EBDD;border:1px solid #4A3527;border-radius:14px;padding:16px 20px;font:400 17px/1.5 'DM Sans',sans-serif;display:none;z-index:5}
+body.shownotes #notes{display:block}
+#bar{position:fixed;left:0;top:0;height:3px;background:#34D27B;transition:width .4s;z-index:5}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="stage">
+<section class="slide" id="cover" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:1080px;background:radial-gradient(circle at 78% 50%, #3A2619 0%, #24170F 62%)"></div>
+<div style="width:860px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">PROYECTO DE BRANDING</p>
+<div style="display:flex;align-items:center;gap:24px">
+<svg aria-label="Isotipo de Rollback: taza de café cuyo vapor forma la flecha de deshacer" viewBox="0 0 120 120" width="120" height="120" style="width:136px;height:136px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<h1 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;letter-spacing:-3px;line-height:1">rollback<span style="color:#34D27B">_</span></h1>
+</div>
+<p style="font-size:44px;font-weight:500;color:#D9CBB8">La cafetería transaccional</p>
+<p style="font-family:'Caveat', cursive;font-size:72px;font-weight:600;color:#E09A3E;line-height:1.1">Si el día falla, haz rollback.</p>
+</div>
+<iframe class="emb" sandbox="allow-scripts" tabindex="-1" style="position:absolute;left:1032px;top:290px;width:760px;height:500px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;/head&gt;&lt;body&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+.w{box-sizing:border-box;height:100%;background:#1A100A;border:2px solid #4A3527;border-radius:24px;overflow:hidden;color:#F4EBDD;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,&quot;Courier New&quot;,monospace}
+.b{display:flex;gap:12px;align-items:center;padding:20px 24px;background:#2E1F16}
+.b i{width:16px;height:16px;border-radius:50%;display:block}
+.b span{margin-left:16px;color:#BFAE98;font-size:24px}
+pre{margin:0;padding:28px 32px;font-size:26px;line-height:1.6;white-space:pre-wrap;font-family:inherit}
+.g{color:#34D27B}.c{color:#E09A3E}.m{color:#BFAE98}
+.cur{display:inline-block;width:14px;height:30px;background:#34D27B;vertical-align:-5px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+&lt;/style&gt;
+&lt;div class=&quot;w&quot;&gt;&lt;div class=&quot;b&quot;&gt;&lt;i style=&quot;background:#E5484D&quot;&gt;&lt;/i&gt;&lt;i style=&quot;background:#E09A3E&quot;&gt;&lt;/i&gt;&lt;i style=&quot;background:#34D27B&quot;&gt;&lt;/i&gt;&lt;span&gt;rollback — terminal&lt;/span&gt;&lt;/div&gt;&lt;pre id=&quot;t&quot;&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;script&gt;
+var L=[[&quot;$ &quot;,&quot;g&quot;],[&quot;git init rollback\n&quot;,&quot;&quot;],[&quot;$ &quot;,&quot;g&quot;],[&quot;brew espresso --origen=venezuela\n&quot;,&quot;&quot;],[&quot;  ✓ espresso listo en 25 s\n&quot;,&quot;m&quot;],[&quot;$ &quot;,&quot;g&quot;],[&quot;git commit -m \&quot;un buen día\&quot;\n&quot;,&quot;&quot;],[&quot;  [main 4f2a1c] transacción confirmada ✓\n&quot;,&quot;c&quot;],[&quot;$ &quot;,&quot;g&quot;]];
+var t=document.getElementById(&quot;t&quot;),i=0,j=0,el=null;
+function step(){
+if(i&gt;=L.length){var c=document.createElement(&quot;span&quot;);c.className=&quot;cur&quot;;t.appendChild(c);setTimeout(function(){t.innerHTML=&quot;&quot;;i=0;j=0;el=null;step()},7000);return}
+if(j===0){el=document.createElement(&quot;span&quot;);el.className=L[i][1];t.appendChild(el)}
+el.textContent+=L[i][0].charAt(j);j++;
+if(j&gt;=L[i][0].length){var k=L[i][1];i++;j=0;setTimeout(step,k===&quot;g&quot;?120:450)}
+else{setTimeout(step,L[i][1]===&quot;&quot;?55:15)}
+}
+setTimeout(step,600);
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-size:24px;color:#BFAE98">Ivifer Pita · Octubre 2026</p>
+<aside>Presentar la marca: Rollback, la cafetería transaccional. La terminal de la derecha se escribe sola: muestra la idea central, cada pedido es una transacción que se confirma con un commit.</aside>
+</section>
+<section class="slide" id="indice" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">ÍNDICE</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Contenido</h2>
+<p style="font-size:32px;color:#5A4334;line-height:1.4;width:1500px">El concepto: una cafetería donde cada pedido funciona como una transacción de base de datos. Se confirma con un <b>commit</b> y, si algo falla, se revierte con un <b>rollback</b>.</p>
+<div style="flex:1"></div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:40px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;color:#1C7A45">01</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Branding</h3>
+<ul style="font-size:24px;line-height:1.5;color:#5A4334">
+<li>Nombre, clasificación y FODA</li>
+<li>Eslogan, promesa y valores</li>
+<li>Brand persona y tono</li>
+<li>Público y buyer persona</li>
+</ul>
+<p style="font-size:24px;font-weight:700"><a href="#3">Ir a la sección →</a></p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:40px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;color:#1C7A45">02</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Look &amp; Feel</h3>
+<ul style="font-size:24px;line-height:1.5;color:#5A4334">
+<li>Logotipo y variaciones</li>
+<li>Proporciones y usos</li>
+<li>Colorimetría y tipografías</li>
+<li>Recursos y aplicaciones</li>
+</ul>
+<p style="font-size:24px;font-weight:700"><a href="#14">Ir a la sección →</a></p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:16px;background:#24170F;color:#F4EBDD;border:2px solid #24170F;border-radius:24px;padding:40px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;color:#34D27B">03</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Plan de medios</h3>
+<ul style="font-size:24px;line-height:1.5;color:#D9CBB8">
+<li>Objetivo y plataformas</li>
+<li>Pilares e iniciativas</li>
+<li>Grilla de 9 publicaciones</li>
+<li>Calendario y métricas</li>
+</ul>
+<p style="font-size:24px;font-weight:700;color:#34D27B"><a href="#22">Ir a la sección →</a></p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">02</p>
+<aside>El proyecto tiene tres partes, igual que la consigna: branding, look and feel y plan de medios. Las tarjetas son clicables para saltar a cada sección.</aside>
+</section>
+<section class="slide" id="p1" data-transition="push" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<div style="width:820px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">PARTE 01</p>
+<h1 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;letter-spacing:-3px;line-height:1">Branding<span style="color:#34D27B">_</span></h1>
+<p style="font-size:32px;color:#D9CBB8;line-height:1.4">Quién es Rollback: su nombre, su personalidad, lo que promete y a quién le habla.</p>
+</div>
+<div data-build-in="rise" style="position:absolute;left:1056px;top:330px;width:736px;background:#1A100A;border:2px solid #4A3527;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono', 'Courier New', monospace">
+<p style="font-size:32px;line-height:1.5;color:#34D27B">BEGIN TRANSACTION</p>
+<p style="font-size:32px;line-height:1.5">&#160;&#160;<span style="color:#34D27B">SELECT</span> identidad</p>
+<p style="font-size:32px;line-height:1.5">&#160;&#160;<span style="color:#34D27B">FROM</span> rollback</p>
+<p style="font-size:32px;line-height:1.5">&#160;&#160;<span style="color:#34D27B">WHERE</span> esencia =</p>
+<p style="font-size:32px;line-height:1.5;color:#E09A3E">&#160;&#160;&#160;&#160;'café + código'</p>
+</div>
+<aside>Primera parte: la identidad de la marca. Todo lo que viene después, el logo y las publicaciones, sale de aquí.</aside>
+</section>
+<section class="slide" id="nombre" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">01 · BRANDING</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Nombre</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:64px;align-items:stretch">
+<div style="width:760px;flex:none;background:#24170F;color:#F4EBDD;border-radius:24px;padding:56px;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;letter-spacing:-4px;line-height:1">rollback<span style="color:#34D27B">_</span></p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">/ról·bak/ · sustantivo · informática</p>
+<hr style="border-top:2px solid #4A3527">
+<p style="font-size:32px;line-height:1.4;color:#F4EBDD">Operación que deshace una transacción fallida y devuelve la base de datos a su <span style="color:#34D27B">último estado estable</span>.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:28px;justify-content:center">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">¿Por qué Rollback?</h3>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Cuenta una historia.</b> El café es el punto de restauración de tu día: te devuelve a tu mejor estado.</p>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Es corto y sonoro.</b> Ocho letras, fácil de pronunciar en español y en inglés.</p>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Tiene ADN tech sin excluir.</b> Todos entendemos la idea de “deshacer”, aunque no sepamos programar.</p>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Sostiene la promesa.</b> Si tu pedido falla, lo revertimos.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">04</p>
+<aside>El nombre viene de las bases de datos. Un rollback deshace lo que salió mal y devuelve todo al último estado estable. Eso queremos ser para el cliente: el botón de deshacer de su día, en forma de café.</aside>
+</section>
+<section class="slide" id="clasificacion" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">01 · BRANDING</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Clasificación de la marca</h2>
+<div style="flex:1"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#E09A3E">POR SU COMPOSICIÓN</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">Imagotipo <span style="color:#34D27B">(mixta)</span></h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Une un símbolo (la taza que deshace) y un texto (rollback_) que también funcionan por separado.</p>
+</div>
+<div style="background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#E09A3E">POR SU NOMBRE</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">Evocativa</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">No describe el producto. Sugiere una idea: volver a un buen estado después de un mal momento.</p>
+</div>
+<div style="background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#E09A3E">POR LO QUE OFRECE</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">Producto y servicio</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Vende café de origen venezolano y, sobre todo, una experiencia: un espacio para estudiar, trabajar y reunirse.</p>
+</div>
+<div style="background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#E09A3E">POR SU ALCANCE</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">Local con proyección</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Nace en Caracas, cerca de universidades y oficinas, y puede crecer como franquicia en otras ciudades universitarias.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">05</p>
+<aside>Rollback es un imagotipo o marca mixta: tiene símbolo y texto. Su nombre es evocativo porque no dice “café”, sino que sugiere una sensación. Ofrece producto y servicio, y nace como marca local.</aside>
+</section>
+<section class="slide" id="foda" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">01 · BRANDING</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Análisis FODA</h2>
+<div style="flex:1"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="background:#FBF6EE;border-left:12px solid #1C7A45;border-radius:20px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Fortalezas</h3><p style="font-size:24px;color:#6B5443">interno · a favor</p></div>
+<ul style="font-size:24px;line-height:1.4;color:#3D2B20">
+<li>Concepto único: no existe otro café transaccional</li>
+<li>Garantía rollback: cambio sin costo si algo falla</li>
+<li>Café venezolano con trazabilidad por QR</li>
+<li>Identidad muy compartible en redes</li>
+</ul>
+</div>
+<div style="background:#FBF6EE;border-left:12px solid #E09A3E;border-radius:20px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Oportunidades</h3><p style="font-size:24px;color:#6B5443">externo · a favor</p></div>
+<ul style="font-size:24px;line-height:1.4;color:#3D2B20">
+<li>Auge del trabajo remoto y freelance</li>
+<li>Universidades y oficinas tech cercanas</li>
+<li>Crecimiento del café de especialidad en Caracas</li>
+<li>Alianzas con comunidades tech y hackatones</li>
+</ul>
+</div>
+<div style="background:#FBF6EE;border-left:12px solid #8A5A3B;border-radius:20px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Debilidades</h3><p style="font-size:24px;color:#6B5443">interno · en contra</p></div>
+<ul style="font-size:24px;line-height:1.4;color:#3D2B20">
+<li>Marca nueva, todavía sin reconocimiento</li>
+<li>El lenguaje técnico puede confundir al inicio</li>
+<li>La garantía rollback genera costos extra</li>
+<li>Depende de electricidad e internet estables</li>
+</ul>
+</div>
+<div style="background:#FBF6EE;border-left:12px solid #24170F;border-radius:20px;padding:32px 40px;display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Amenazas</h3><p style="font-size:24px;color:#6B5443">externo · en contra</p></div>
+<ul style="font-size:24px;line-height:1.4;color:#3D2B20">
+<li>Cafeterías de especialidad ya posicionadas</li>
+<li>Cadenas grandes con precios más bajos</li>
+<li>Inflación y costo de insumos importados</li>
+<li>Fallas de luz e internet en la ciudad</li>
+</ul>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">06</p>
+<aside>La gran fortaleza es que el concepto es único. Las debilidades se atacan con la estrategia: el tono explica los términos técnicos y el local tiene planta eléctrica y wifi de respaldo para enfrentar las fallas de servicio.</aside>
+</section>
+<section class="slide" id="eslogan" data-transition="fade" style="background:#34D27B;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#24170F">01 · BRANDING · ESLOGAN</p>
+<h1 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;letter-spacing:-4px;line-height:1.05">Si el día falla,<br>haz rollback.</h1>
+<p style="font-size:32px;line-height:1.4;width:900px">Toma el lenguaje de las bases de datos para hablar de algo que todos vivimos: los días difíciles. El café se convierte en el botón de deshacer.</p>
+<p style="font-family:'Caveat', cursive;font-size:56px;font-weight:600;width:900px;line-height:1.1">Corto, con ritmo y con una acción concreta.</p>
+<iframe class="emb" sandbox="allow-scripts" tabindex="-1" style="position:absolute;left:1192px;top:600px;width:600px;height:320px;border:0;background:transparent" data-src="&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;/head&gt;&lt;body&gt;&lt;style&gt;
+html,body{margin:0;height:100%;background:transparent;overflow:hidden}
+.w{box-sizing:border-box;height:100%;background:#24170F;border-radius:24px;overflow:hidden;color:#F4EBDD;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,&quot;Courier New&quot;,monospace;box-shadow:0 18px 40px rgba(36,23,15,.35)}
+.b{display:flex;gap:12px;padding:18px 22px;background:#2E1F16}
+.b i{width:16px;height:16px;border-radius:50%;display:block}
+pre{margin:0;padding:24px 28px;font-size:26px;line-height:1.6;white-space:pre-wrap;font-family:inherit}
+.g{color:#34D27B}.c{color:#E09A3E}
+.cur{display:inline-block;width:14px;height:30px;background:#34D27B;vertical-align:-5px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+&lt;/style&gt;
+&lt;div class=&quot;w&quot;&gt;&lt;div class=&quot;b&quot;&gt;&lt;i style=&quot;background:#E5484D&quot;&gt;&lt;/i&gt;&lt;i style=&quot;background:#E09A3E&quot;&gt;&lt;/i&gt;&lt;i style=&quot;background:#34D27B&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;pre id=&quot;t&quot;&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;script&gt;
+var L=[[&quot;&gt; estado: &quot;,&quot;&quot;],[&quot;lunes caótico\n&quot;,&quot;c&quot;],[&quot;&gt; &quot;,&quot;&quot;,&quot;&quot;],[&quot;ROLLBACK ↺\n&quot;,&quot;g&quot;],[&quot;&gt; estado: &quot;,&quot;&quot;],[&quot;listo para empezar ✓\n&quot;,&quot;g&quot;]];
+var t=document.getElementById(&quot;t&quot;),i=0,j=0,el=null;
+function step(){
+if(i&gt;=L.length){var c=document.createElement(&quot;span&quot;);c.className=&quot;cur&quot;;t.appendChild(c);setTimeout(function(){t.innerHTML=&quot;&quot;;i=0;j=0;step()},6000);return}
+if(j===0){el=document.createElement(&quot;span&quot;);el.className=L[i][1];t.appendChild(el)}
+el.textContent+=L[i][0].charAt(j);j++;
+if(j&gt;=L[i][0].length){i++;j=0;setTimeout(step,i===2?900:350)}
+else{setTimeout(step,60)}
+}
+setTimeout(step,500);
+&lt;/script&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+<aside>El eslogan es la frase que la gente debe recordar. Usa el lenguaje de la marca, rollback, para hablar de algo universal: los días malos. Y termina con una acción, haz rollback, que invita a venir al café.</aside>
+</section>
+<section class="slide" id="promesa" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">01 · BRANDING · PROMESA DE MARCA</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.15">“Cada taza llega como la pediste.<br>Y si algo falla, <span style="color:#34D27B">la revertimos</span>.”</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="m16 9-5.5 5.5L8 12" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Consistencia</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">El mismo sabor y la misma calidad en cada visita, con recetas medidas al gramo.</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Garantía rollback</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Si tu bebida no sale como la pediste, la preparamos de nuevo sin costo y sin discusiones.</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Tu foco, a salvo</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Enchufes, wifi de respaldo y planta eléctrica para que nunca pierdas tu progreso.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">08</p>
+<aside>La promesa es el compromiso con el cliente. Tiene tres partes que se pueden cumplir y comprobar: consistencia, la garantía rollback y un espacio confiable para trabajar.</aside>
+</section>
+<section class="slide" id="valores" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">01 · BRANDING · VALORES</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Somos ACID</h2>
+<p style="font-size:32px;line-height:1.4;color:#5A4334;width:1500px">Las cuatro propiedades que hacen confiable una transacción son también los valores de Rollback.</p>
+<div style="flex:1"></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;line-height:1;color:#1C7A45">A</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Atomicidad</h3>
+<p style="font-size:24px;line-height:1.4;color:#6B5443">En datos: todo o nada.</p>
+<p style="font-size:24px;line-height:1.4">Tu pedido llega completo o no se cobra.</p>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;line-height:1;color:#1C7A45">C</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Consistencia</h3>
+<p style="font-size:24px;line-height:1.4;color:#6B5443">En datos: las reglas siempre se cumplen.</p>
+<p style="font-size:24px;line-height:1.4">El mismo sabor y calidad en cada visita.</p>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;line-height:1;color:#1C7A45">I</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Aislamiento</h3>
+<p style="font-size:24px;line-height:1.4;color:#6B5443">En datos: sin interferencias.</p>
+<p style="font-size:24px;line-height:1.4">Una zona de silencio para concentrarte.</p>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;line-height:1;color:#1C7A45">D</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Durabilidad</h3>
+<p style="font-size:24px;line-height:1.4;color:#6B5443">En datos: lo confirmado no se pierde.</p>
+<p style="font-size:24px;line-height:1.4">Tus puntos y tu progreso siempre se guardan.</p>
+</div>
+</div>
+<p style="font-family:'Caveat', cursive;font-size:44px;font-weight:600;color:#8A5A3B">Dato extra: la acidez también es una nota de cata del buen café.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">09</p>
+<aside>ACID son las propiedades de las transacciones en bases de datos: atomicidad, consistencia, aislamiento y durabilidad. Cada una se traduce en un valor concreto de la cafetería. Y tiene doble sentido, porque la acidez es una característica del café.</aside>
+</section>
+<section class="slide" id="persona" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">01 · BRANDING · BRAND PERSONA</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Si Rollback fuera una persona…</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:48px;align-items:stretch">
+<div style="width:820px;flex:none;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:44px;display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;gap:28px;align-items:center">
+<div style="width:136px;height:136px;flex:none;border-radius:50%;background:#34D27B;display:flex;align-items:center;justify-content:center">
+<svg aria-label="Avatar de Ro con el isotipo de Rollback" viewBox="0 0 120 120" width="120" height="120" style="width:96px;height:96px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#24170F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">Ro, 27 años</h3>
+<p style="font-size:24px;color:#E09A3E">Arquetipo: el Sabio, con un toque de Bufón</p>
+</div>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Ingeniera de software que aprendió a tostar café. De día trabaja en una startup y los fines de semana prepara el mejor cold brew de su edificio. Sabe mucho, pero lo explica fácil y siempre con una broma.</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+<p style="font-size:24px;background:#24170F;border:2px solid #34D27B;color:#34D27B;border-radius:999px;padding:8px 20px">Ingeniosa</p>
+<p style="font-size:24px;background:#24170F;border:2px solid #34D27B;color:#34D27B;border-radius:999px;padding:8px 20px">Precisa</p>
+<p style="font-size:24px;background:#24170F;border:2px solid #34D27B;color:#34D27B;border-radius:999px;padding:8px 20px">Calmada</p>
+<p style="font-size:24px;background:#24170F;border:2px solid #34D27B;color:#34D27B;border-radius:999px;padding:8px 20px">Cálida</p>
+<p style="font-size:24px;background:#24170F;border:2px solid #34D27B;color:#34D27B;border-radius:999px;padding:8px 20px">Curiosa</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8"><b style="color:#F4EBDD">Le encanta:</b> el olor del café recién molido, resolver bugs a medianoche y explicar cosas difíciles con ejemplos simples.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;justify-content:center">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Es… pero no es…</h3>
+<table style="font-size:32px;color:#F4EBDD">
+<tr><th style="width:50%;color:#34D27B;text-align:left">Es</th><th style="width:50%;color:#E09A3E;text-align:left">No es</th></tr>
+<tr><td>Ingeniosa</td><td>Pedante</td></tr>
+<tr><td>Precisa</td><td>Fría</td></tr>
+<tr><td>Cercana</td><td>Infantil</td></tr>
+<tr><td>Nerd</td><td>Excluyente</td></tr>
+<tr><td>Segura</td><td>Arrogante</td></tr>
+</table>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">10</p>
+<aside>La brand persona humaniza la marca. Ro sabe mucho, como el arquetipo del Sabio, pero lo comunica con humor, como el Bufón. La tabla “es, pero no es” sirve para cuidar que el humor nerd nunca se vuelva pedante ni excluyente.</aside>
+</section>
+<section class="slide" id="tono" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">01 · BRANDING · TONO COMUNICACIONAL</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Cercano, ingenioso y claro</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:64px">
+<div style="width:680px;flex:none;display:flex;flex-direction:column;gap:28px">
+<p style="font-size:24px;line-height:1.45;color:#5A4334">Tuteamos, usamos metáforas técnicas que cualquiera entiende y nunca regañamos al cliente.</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px;color:#6B5443">Formal</p><p style="font-size:24px;font-weight:700">Casual</p></div>
+<div style="position:relative;width:680px;height:28px">
+<div style="position:absolute;left:0;top:8px;width:680px;height:12px;background:#E3D5C0;border-radius:6px"></div>
+<div style="position:absolute;left:0;top:8px;width:70%;height:12px;background:#1C7A45;border-radius:6px"></div>
+<div style="position:absolute;left:calc(70% - 14px);top:0;width:28px;height:28px;background:#24170F;border-radius:50%"></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px;color:#6B5443">Serio</p><p style="font-size:24px;font-weight:700">Divertido</p></div>
+<div style="position:relative;width:680px;height:28px">
+<div style="position:absolute;left:0;top:8px;width:680px;height:12px;background:#E3D5C0;border-radius:6px"></div>
+<div style="position:absolute;left:0;top:8px;width:65%;height:12px;background:#1C7A45;border-radius:6px"></div>
+<div style="position:absolute;left:calc(65% - 14px);top:0;width:28px;height:28px;background:#24170F;border-radius:50%"></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px;color:#6B5443">Técnico</p><p style="font-size:24px;font-weight:700">Simple</p></div>
+<div style="position:relative;width:680px;height:28px">
+<div style="position:absolute;left:0;top:8px;width:680px;height:12px;background:#E3D5C0;border-radius:6px"></div>
+<div style="position:absolute;left:0;top:8px;width:60%;height:12px;background:#1C7A45;border-radius:6px"></div>
+<div style="position:absolute;left:calc(60% - 14px);top:0;width:28px;height:28px;background:#24170F;border-radius:50%"></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px">
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px;color:#6B5443">Distante</p><p style="font-size:24px;font-weight:700">Cercano</p></div>
+<div style="position:relative;width:680px;height:28px">
+<div style="position:absolute;left:0;top:8px;width:680px;height:12px;background:#E3D5C0;border-radius:6px"></div>
+<div style="position:absolute;left:0;top:8px;width:85%;height:12px;background:#1C7A45;border-radius:6px"></div>
+<div style="position:absolute;left:calc(85% - 14px);top:0;width:28px;height:28px;background:#24170F;border-radius:50%"></div>
+</div>
+</div>
+<p style="font-size:24px;line-height:1.45;background:#24170F;color:#F4EBDD;border-radius:16px;padding:20px 28px"><b style="color:#34D27B">Regla de oro:</b> si alguien sin formación técnica no entiende el chiste, lo explicamos.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Así sí · Así no</h3>
+<div style="background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;line-height:1.4"><b style="color:#1C7A45">SÍ</b>&#160;&#160;“Tu latte está en cola. Sale en 3 minutos.”</p>
+<p style="font-size:24px;line-height:1.4;color:#8A3B2E"><b>NO</b>&#160;&#160;“Proceso 4521 en ejecución.”</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;line-height:1.4"><b style="color:#1C7A45">SÍ</b>&#160;&#160;“¿Lunes difícil? Haz rollback con un cortado.”</p>
+<p style="font-size:24px;line-height:1.4;color:#8A3B2E"><b>NO</b>&#160;&#160;“Ejecute ROLLBACK TRANSACTION.”</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;padding:24px 28px;display:flex;flex-direction:column;gap:8px">
+<p style="font-size:24px;line-height:1.4"><b style="color:#1C7A45">SÍ</b>&#160;&#160;“Error 404: sueño no encontrado. Solución: espresso doble.”</p>
+<p style="font-size:24px;line-height:1.4;color:#8A3B2E"><b>NO</b>&#160;&#160;“Usted presenta un nivel de energía insuficiente.”</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">11</p>
+<aside>El tono define cómo habla la marca. Las barras muestran dónde se ubica en cada escala. Los ejemplos de la derecha comparan cómo sí y cómo no escribiríamos el mismo mensaje.</aside>
+</section>
+<section class="slide" id="publico" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">01 · BRANDING · PÚBLICO OBJETIVO</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">¿A quién le hablamos?</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:14px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Demográfico</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">De 18 a 32 años, todos los géneros. Estudiantes universitarios y jóvenes profesionales de nivel socioeconómico medio y medio alto.</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:14px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Geográfico</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Caracas, en zonas cercanas a universidades y oficinas. A futuro, otras ciudades universitarias del país.</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:14px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+  <path d="M9 18h6" />
+  <path d="M10 22h4" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Psicográfico</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Valoran la productividad, la tecnología y el buen café. Disfrutan el humor de internet y buscan dónde estudiar o trabajar.</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:14px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Conductual</h3>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Visitan cafés varias veces por semana, se quedan horas trabajando y descubren lugares nuevos por Instagram y TikTok.</p>
+</div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#E09A3E">SEGMENTOS:</p>
+<p style="font-size:24px;background:#34D27B;color:#24170F;border-radius:999px;padding:8px 20px">Estudiantes de ingeniería y diseño</p>
+<p style="font-size:24px;background:#34D27B;color:#24170F;border-radius:999px;padding:8px 20px">Programadores</p>
+<p style="font-size:24px;background:#34D27B;color:#24170F;border-radius:999px;padding:8px 20px">Freelancers y trabajo remoto</p>
+<p style="font-size:24px;background:#34D27B;color:#24170F;border-radius:999px;padding:8px 20px">Creadores de contenido</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">12</p>
+<aside>El público se segmenta en cuatro variables: demográfica, geográfica, psicográfica y conductual. Los segmentos de abajo son los grupos concretos a los que apunta el contenido.</aside>
+</section>
+<section class="slide" id="buyer" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">01 · BRANDING · BUYER PERSONA</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Andrés, nuestro cliente ideal</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:32px;align-items:stretch">
+<div style="width:540px;flex:none;background:#24170F;color:#F4EBDD;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:24px;align-items:center">
+<div style="width:112px;height:112px;flex:none;border-radius:50%;background:#E09A3E;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;color:#24170F">AM</p></div>
+<div style="display:flex;flex-direction:column;gap:4px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Andrés Mendoza</h3>
+<p style="font-size:24px;color:#BFAE98">23 años · Caracas</p>
+</div>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Estudiante de último año de Ingeniería Informática y desarrollador web freelance. Trabaja con laptop desde cafés casi todos los días.</p>
+<div style="flex:1"></div>
+<p style="font-family:'Caveat', cursive;font-size:44px;font-weight:600;line-height:1.15;color:#E09A3E">“Solo necesito un enchufe, wifi decente y un café que no me falle.”</p>
+</div>
+<div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div style="background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#1C7A45">OBJETIVOS</h3>
+<ul style="font-size:24px;line-height:1.4;color:#3D2B20">
+<li>Entregar sus proyectos a tiempo</li>
+<li>Tener un sitio fijo para trabajar</li>
+<li>Conocer gente del mundo tech</li>
+</ul>
+</div>
+<div style="background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#8A3B2E">FRUSTRACIONES</h3>
+<ul style="font-size:24px;line-height:1.4;color:#3D2B20">
+<li>Cafés ruidosos y sin enchufes</li>
+<li>Cortes de luz e internet</li>
+<li>Sentirse incómodo por quedarse horas</li>
+</ul>
+</div>
+<div style="background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#8A5A3B">HÁBITOS DIGITALES</h3>
+<ul style="font-size:24px;line-height:1.4;color:#3D2B20">
+<li>Instagram y TikTok a diario</li>
+<li>LinkedIn, GitHub y Discord</li>
+<li>Rinde más de tarde y de noche</li>
+</ul>
+</div>
+<div style="background:#24170F;border:2px solid #24170F;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:10px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#34D27B">LO QUE ROLLBACK LE DA</h3>
+<ul style="font-size:24px;line-height:1.4;color:#F4EBDD">
+<li>Zona Aislamiento con enchufes</li>
+<li>Planta eléctrica y wifi de respaldo</li>
+<li>Pedidos garantizados</li>
+</ul>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">13</p>
+<aside>Andrés es un personaje ficticio que representa al cliente ideal. Cada frustración suya tiene una respuesta concreta en la propuesta de Rollback, que se ve en la tarjeta oscura.</aside>
+</section>
+<section class="slide" id="p2" data-transition="push" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<div style="width:900px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">PARTE 02</p>
+<h1 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;letter-spacing:-3px;line-height:1">Look &amp; Feel<span style="color:#34D27B">_</span></h1>
+<p style="font-size:32px;color:#D9CBB8;line-height:1.4">La guía de diseño: logotipo, colores, tipografías y los recursos que hacen reconocible a Rollback.</p>
+</div>
+<div data-build-in="rise" style="position:absolute;left:1056px;top:330px;width:736px;background:#1A100A;border:2px solid #4A3527;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono', 'Courier New', monospace">
+<p style="font-size:32px;line-height:1.5"><span style="color:#34D27B">UPDATE</span> marca</p>
+<p style="font-size:32px;line-height:1.5"><span style="color:#34D27B">SET</span> logo = <span style="color:#E09A3E">'taza + ↺'</span>,</p>
+<p style="font-size:32px;line-height:1.5">&#160;&#160;&#160;&#160;color = <span style="color:#E09A3E">'#24170F'</span>,</p>
+<p style="font-size:32px;line-height:1.5">&#160;&#160;&#160;&#160;fuente = <span style="color:#E09A3E">'mono'</span></p>
+<p style="font-size:32px;line-height:1.5;color:#34D27B">COMMIT</p>
+</div>
+<aside>Segunda parte: la línea gráfica. Cada elemento tiene una razón de ser que conecta con la esencia de la marca: café y código.</aside>
+</section>
+<section class="slide" id="logo" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">02 · LOOK &amp; FEEL · LOGOTIPO</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Una taza que deshace</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:64px;align-items:stretch">
+<div style="width:860px;height:560px;flex:none;background:#24170F;border-radius:24px;display:flex;align-items:center;justify-content:center;gap:28px">
+<svg aria-label="Isotipo de Rollback: taza de café cuyo vapor forma la flecha de deshacer" viewBox="0 0 120 120" width="120" height="120" style="width:180px;height:180px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:104px;font-weight:800;letter-spacing:-3px;line-height:1;color:#F4EBDD">rollback<span style="color:#34D27B">_</span></p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:32px;justify-content:center">
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">El isotipo</h3>
+<p style="font-size:24px;line-height:1.45;color:#5A4334">Une una taza de café con la flecha de deshacer (↺). El vapor se convierte en la flecha: el café es lo que te devuelve a tu mejor estado.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">El logotipo</h3>
+<p style="font-size:24px;line-height:1.45;color:#5A4334">En minúscula y con fuente monoespaciada, como se escribe en una terminal. Transmite cercanía y precisión al mismo tiempo.</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">El cursor <span style="color:#1C7A45">_</span></h3>
+<p style="font-size:24px;line-height:1.45;color:#5A4334">El guion bajo final es el cursor que parpadea: la marca siempre está lista para escribir un día nuevo.</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">15</p>
+<aside>El logo resume el concepto en una sola imagen: una taza de café cuyo vapor dibuja el símbolo universal de deshacer. Es simple, se entiende en tamaños pequeños y funciona en un solo color.</aside>
+</section>
+<section class="slide" id="logovar" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">02 · LOOK &amp; FEEL · VARIACIONES</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Una marca, seis versiones</h2>
+<div style="flex:1"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#24170F;display:flex;align-items:center;justify-content:center;gap:14px">
+<svg aria-label="Versión principal horizontal" viewBox="0 0 120 120" width="120" height="120" style="width:76px;height:76px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1;color:#F4EBDD">rollback<span style="color:#34D27B">_</span></p>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;font-weight:700">Principal horizontal</p>
+<p style="font-size:24px;color:#6B5443">Digital, letreros y presentaciones</p>
+</div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#F4EBDD;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
+<svg aria-label="Versión vertical" viewBox="0 0 120 120" width="120" height="120" style="width:84px;height:84px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#1C7A45" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;line-height:1;color:#24170F">rollback<span style="color:#1C7A45">_</span></p>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;font-weight:700">Vertical</p>
+<p style="font-size:24px;color:#6B5443">Vasos, bolsas y espacios cuadrados</p>
+</div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#E3D5C0;display:flex;align-items:center;justify-content:center">
+<div style="width:132px;height:132px;border-radius:50%;background:#34D27B;display:flex;align-items:center;justify-content:center">
+<svg aria-label="Isotipo en avatar circular" viewBox="0 0 120 120" width="120" height="120" style="width:92px;height:92px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#24170F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+</div>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;font-weight:700">Isotipo</p>
+<p style="font-size:24px;color:#6B5443">Foto de perfil, favicon y sellos</p>
+</div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#F4EBDD;display:flex;align-items:center;justify-content:center;gap:14px">
+<svg aria-label="Versión monocromática oscura" viewBox="0 0 120 120" width="120" height="120" style="width:76px;height:76px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#24170F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1;color:#24170F">rollback_</p>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;font-weight:700">Monocromática oscura</p>
+<p style="font-size:24px;color:#6B5443">Impresión a una tinta y documentos</p>
+</div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#8A5A3B;display:flex;align-items:center;justify-content:center;gap:14px">
+<svg aria-label="Versión monocromática clara" viewBox="0 0 120 120" width="120" height="120" style="width:76px;height:76px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#F4EBDD" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1;color:#F4EBDD">rollback_</p>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;font-weight:700">Monocromática clara</p>
+<p style="font-size:24px;color:#6B5443">Sobre fotos y fondos de color</p>
+</div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#24170F;display:flex;align-items:center;justify-content:center">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;line-height:1;color:#F4EBDD">r<span style="color:#34D27B">_</span></p>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px">
+<p style="font-size:24px;font-weight:700">Monograma</p>
+<p style="font-size:24px;color:#6B5443">Bordados, sellos y tickets</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">16</p>
+<aside>El logo tiene seis variaciones para que funcione en cualquier soporte: horizontal, vertical, solo el isotipo, dos versiones de un solo color y un monograma para espacios muy pequeños.</aside>
+</section>
+<section class="slide" id="logoreglas" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">02 · LOOK &amp; FEEL · PROPORCIONES Y USOS</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Reglas del logotipo</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:48px">
+<div style="position:relative;width:760px;height:340px;flex:none;background:#24170F;border-radius:24px;display:flex;align-items:center;justify-content:center;gap:40px">
+<div style="position:absolute;left:53px;top:70px;width:654px;height:200px;border:2px dashed #E09A3E;border-radius:4px"></div>
+<p style="position:absolute;left:64px;top:76px;width:60px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#E09A3E">1x</p>
+<svg aria-label="Logotipo de Rollback dentro de su zona de protección" viewBox="0 0 120 120" width="120" height="120" style="width:120px;height:120px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:80px;font-weight:800;letter-spacing:-2px;line-height:1;color:#F4EBDD">rollback<span style="color:#34D27B">_</span></p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px;justify-content:center">
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Construcción.</b> La unidad x es la altura de la letra “o”. El isotipo mide unas 2,5x de alto y se separa del texto 1x.</p>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Zona de protección.</b> Espacio libre de 1x alrededor del logo (línea punteada). Ningún texto o imagen puede invadirlo.</p>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Tamaño mínimo.</b> Versión horizontal: 120 px en pantalla o 3 cm impreso. Isotipo: 24 px o 0,8 cm.</p>
+</div>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:150px;background:#24170F;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px;transform:skewX(-24deg)">
+<svg aria-label="Logo deformado, uso incorrecto" viewBox="0 0 120 120" width="120" height="120" style="width:48px;height:48px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;line-height:1;color:#F4EBDD">rollback<span style="color:#34D27B">_</span></p>
+</div>
+</div>
+<div style="display:flex;gap:10px;align-items:center"><span class="xi" role="img" aria-hidden="true" style="color:#8A3B2E;width:28px;height:28px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg></span><p style="font-size:24px;font-weight:700">No inclinar ni deformar</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:150px;background:#24170F;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px;transform:rotate(-14deg)">
+<svg aria-label="Logo rotado, uso incorrecto" viewBox="0 0 120 120" width="120" height="120" style="width:48px;height:48px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;line-height:1;color:#F4EBDD">rollback<span style="color:#34D27B">_</span></p>
+</div>
+</div>
+<div style="display:flex;gap:10px;align-items:center"><span class="xi" role="img" aria-hidden="true" style="color:#8A3B2E;width:28px;height:28px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg></span><p style="font-size:24px;font-weight:700">No rotar</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:150px;background:#24170F;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px">
+<svg aria-label="Logo con colores cambiados, uso incorrecto" viewBox="0 0 120 120" width="120" height="120" style="width:48px;height:48px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#E5484D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#5B8DEF"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#5B8DEF" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#5B8DEF" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;line-height:1;color:#5B8DEF">rollback<span style="color:#E5484D">_</span></p>
+</div>
+</div>
+<div style="display:flex;gap:10px;align-items:center"><span class="xi" role="img" aria-hidden="true" style="color:#8A3B2E;width:28px;height:28px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg></span><p style="font-size:24px;font-weight:700">No cambiar los colores</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:150px;background:#8A5A3B;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden">
+<div style="display:flex;align-items:center;gap:10px">
+<svg aria-label="Logo sobre fondo sin contraste, uso incorrecto" viewBox="0 0 120 120" width="120" height="120" style="width:48px;height:48px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#9E6E4D" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#9E6E4D"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#9E6E4D" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#9E6E4D" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;line-height:1;color:#9E6E4D">rollback_</p>
+</div>
+</div>
+<div style="display:flex;gap:10px;align-items:center"><span class="xi" role="img" aria-hidden="true" style="color:#8A3B2E;width:28px;height:28px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" />
+</svg></span><p style="font-size:24px;font-weight:700">No usar fondos sin contraste</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">17</p>
+<aside>Las reglas protegen el logo: una unidad de medida, una zona de protección y un tamaño mínimo para que siempre se lea bien. Abajo están los usos incorrectos más comunes.</aside>
+</section>
+<section class="slide" id="color" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">02 · LOOK &amp; FEEL · COLORIMETRÍA</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Café + terminal</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:120px;background:#24170F;border-radius:16px"></div>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Espresso</h3>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.4;color:#5A4334">#24170F<br>RGB 36 23 15<br>CMYK 0 36 58 86</p>
+<p style="font-size:24px;line-height:1.4">Café cargado y modo oscuro de los programadores. Fondos y textos.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:120px;background:#F4EBDD;border:2px solid #CDBBA2;border-radius:16px"></div>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Crema</h3>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.4;color:#5A4334">#F4EBDD<br>RGB 244 235 221<br>CMYK 0 4 9 4</p>
+<p style="font-size:24px;line-height:1.4">La espuma del capuchino. Calidez y legibilidad en fondos claros.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:120px;background:#8A5A3B;border-radius:16px"></div>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Grano</h3>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.4;color:#5A4334">#8A5A3B<br>RGB 138 90 59<br>CMYK 0 35 57 46</p>
+<p style="font-size:24px;line-height:1.4">El grano tostado y el origen venezolano. Bordes e ilustraciones.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:120px;background:#E09A3E;border-radius:16px"></div>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Caramelo</h3>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.4;color:#5A4334">#E09A3E<br>RGB 224 154 62<br>CMYK 0 31 72 12</p>
+<p style="font-size:24px;line-height:1.4">Dulzura y energía. Destacados, precios y llamados secundarios.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:12px">
+<div style="height:120px;background:#34D27B;border-radius:16px"></div>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Verde Commit</h3>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.4;color:#5A4334">#34D27B<br>RGB 52 210 123<br>CMYK 75 0 42 18</p>
+<p style="font-size:24px;line-height:1.4">El check de la terminal: confirmado. Solo acciones y éxito.</p>
+</div>
+</div>
+<p style="font-size:24px;font-weight:700">Proporción de uso en las piezas</p>
+<div style="display:flex;height:60px;border-radius:16px;overflow:hidden">
+<div style="flex:35;background:#24170F;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#F4EBDD">Espresso 35 %</p></div>
+<div style="flex:25;background:#F4EBDD;border:2px solid #CDBBA2;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#24170F">Crema 25 %</p></div>
+<div style="flex:15;background:#8A5A3B;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#F4EBDD">Grano 15 %</p></div>
+<div style="flex:15;background:#E09A3E;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#24170F">Caramelo 15 %</p></div>
+<div style="flex:10;background:#34D27B;display:flex;align-items:center;justify-content:center"><p style="font-size:24px;color:#24170F">Verde 10 %</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">18</p>
+<aside>La paleta mezcla dos mundos: los tonos del café, espresso, crema, grano y caramelo, con el verde de la terminal, que en programación significa que todo salió bien. El verde se usa poco, solo para botones y confirmaciones, para que destaque.</aside>
+</section>
+<section class="slide" id="tipo" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">02 · LOOK &amp; FEEL · TIPOGRAFÍAS</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Precisión con calidez</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;line-height:1.1;color:#34D27B">Aa</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">JetBrains Mono</h3>
+<p style="font-size:24px;letter-spacing:2px;color:#E09A3E">TÍTULOS Y LOGO · 400 A 800</p>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Creada para programar: cada letra ocupa el mismo ancho, como en una terminal. Aporta precisión.</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'DM Sans', Arial, sans-serif;font-size:120px;font-weight:700;line-height:1.1;color:#F4EBDD">Aa</p>
+<h3 style="font-family:'DM Sans', Arial, sans-serif;font-size:32px;font-weight:700">DM Sans</h3>
+<p style="font-size:24px;letter-spacing:2px;color:#E09A3E">TEXTOS Y CAPTIONS · 400 A 700</p>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Geométrica y suave. Muy legible en pantallas pequeñas y equilibra la frialdad de la mono.</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-radius:24px;padding:40px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'Caveat', cursive;font-size:120px;font-weight:700;line-height:1.1;color:#E09A3E">Aa</p>
+<h3 style="font-family:'Caveat', cursive;font-size:44px;font-weight:700;line-height:1">Caveat</h3>
+<p style="font-size:24px;letter-spacing:2px;color:#E09A3E">ACENTOS MANUSCRITOS</p>
+<p style="font-size:24px;line-height:1.45;color:#D9CBB8">Imita la letra del barista al escribir tu nombre en el vaso. Solo una frase por pieza.</p>
+</div>
+</div>
+<p style="font-size:24px;font-weight:700">Jerarquía en publicaciones de 1080 × 1350 px</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap">
+<p style="font-size:24px;background:#34D27B;color:#24170F;border-radius:999px;padding:8px 20px">Titular · Mono Bold · 96 px</p>
+<p style="font-size:24px;background:#F4EBDD;color:#24170F;border-radius:999px;padding:8px 20px">Subtítulo · Mono Medium · 48 px</p>
+<p style="font-size:24px;background:#F4EBDD;color:#24170F;border-radius:999px;padding:8px 20px">Cuerpo · DM Sans · 36 px</p>
+<p style="font-size:24px;background:#E09A3E;color:#24170F;border-radius:999px;padding:8px 20px">Nota · Caveat · 56 px</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">19</p>
+<aside>Tres tipografías gratuitas de Google Fonts, cada una con un trabajo. La monoespaciada da el carácter tech, DM Sans asegura la lectura y Caveat aporta el toque humano del barista. Interlineado: 1,1 en títulos y 1,4 en textos.</aside>
+</section>
+<section class="slide" id="recursos" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">02 · LOOK &amp; FEEL · RECURSOS GRÁFICOS</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">El kit visual</h2>
+<div style="flex:1"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px">
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#24170F;display:flex;align-items:center;justify-content:center;gap:6px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;color:#F4EBDD">haz rollback</p>
+<div style="width:24px;height:48px;background:#34D27B"></div>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700">El cursor</p><p style="font-size:24px;color:#6B5443">Cierra titulares y frases clave</p></div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#E3D5C0;display:flex;align-items:center;justify-content:center">
+<div style="width:420px;background:#1A100A;border-radius:14px;display:flex;flex-direction:column;overflow:hidden">
+<div style="display:flex;gap:8px;padding:12px 16px;background:#2E1F16"><div style="width:12px;height:12px;border-radius:50%;background:#E5484D"></div><div style="width:12px;height:12px;border-radius:50%;background:#E09A3E"></div><div style="width:12px;height:12px;border-radius:50%;background:#34D27B"></div></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;padding:18px 20px;color:#F4EBDD"><span style="color:#34D27B">$</span> pedido confirmado ✓</p>
+</div>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700">Ventana de terminal</p><p style="font-size:24px;color:#6B5443">Enmarca anuncios y mensajes</p></div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#8A5A3B;display:flex;align-items:center;justify-content:center">
+<svg aria-label="Patrón de granos de café y bits" viewBox="0 0 480 160" width="480" height="160" style="width:510px;height:170px" xmlns="http://www.w3.org/2000/svg"><rect width="480" height="160" fill="#8A5A3B"/><g fill="#24170F"><ellipse cx="60" cy="50" rx="18" ry="26" transform="rotate(30 60 50)"/><ellipse cx="200" cy="110" rx="18" ry="26" transform="rotate(-25 200 110)"/><ellipse cx="330" cy="45" rx="18" ry="26" transform="rotate(20 330 45)"/><ellipse cx="430" cy="115" rx="18" ry="26" transform="rotate(-35 430 115)"/></g><g fill="none" stroke="#8A5A3B" stroke-width="4" stroke-linecap="round"><path d="M70 33Q56 50 50 67"/><path d="M191 92Q206 108 208 128"/><path d="M337 26Q324 44 323 64"/><path d="M418 99Q434 112 441 131"/></g><g fill="#F4EBDD" opacity="0.6"><rect x="112" y="30" width="18" height="18" rx="3"/><rect x="172" y="30" width="18" height="18" rx="3"/><rect x="262" y="96" width="18" height="18" rx="3"/><rect x="372" y="40" width="18" height="18" rx="3"/><rect x="60" y="112" width="18" height="18" rx="3"/></g><g fill="none" stroke="#F4EBDD" stroke-width="3" opacity="0.6"><rect x="143" y="31" width="16" height="16" rx="3"/><rect x="292" y="97" width="16" height="16" rx="3"/><rect x="402" y="41" width="16" height="16" rx="3"/><rect x="90" y="113" width="16" height="16" rx="3"/></g></svg>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700">Patrón de granos y bits</p><p style="font-size:24px;color:#6B5443">Fondos y texturas suaves</p></div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#F4EBDD;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;padding:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;border:2px solid #24170F;border-radius:8px;padding:6px 14px">SELECT</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;border:2px solid #24170F;border-radius:8px;padding:6px 14px">INSERT</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;background:#24170F;color:#34D27B;border:2px solid #24170F;border-radius:8px;padding:6px 14px">JOIN</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;border:2px solid #24170F;border-radius:8px;padding:6px 14px">NULL</p>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700">Etiquetas de código</p><p style="font-size:24px;color:#6B5443">Categorías del menú y secciones</p></div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:#24170F;display:flex;align-items:center;justify-content:center;gap:28px">
+<span class="xi" role="img" aria-hidden="true" style="color:#F4EBDD;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 18 6-6-6-6" />
+  <path d="m8 6-6 6 6 6" />
+</svg></span>
+<span class="xi" role="img" aria-hidden="true" style="color:#E09A3E;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 6v6l4 2" />
+</svg></span>
+<span class="xi" role="img" aria-hidden="true" style="color:#F4EBDD;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <ellipse cx="12" cy="5" rx="9" ry="3" />
+  <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+  <path d="M3 12A9 3 0 0 0 21 12" />
+</svg></span>
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />
+</svg></span>
+<span class="xi" role="img" aria-hidden="true" style="color:#F4EBDD;width:56px;height:56px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
+</svg></span>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700">Íconos de línea</p><p style="font-size:24px;color:#6B5443">Trazo de 3 px y puntas redondeadas</p></div>
+</div>
+<div style="background:#FBF6EE;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="height:170px;background:radial-gradient(circle at 30% 30%, #E09A3E 0%, #8A5A3B 45%, #24170F 100%);display:flex;align-items:center;justify-content:center">
+<p style="font-family:'Caveat', cursive;font-size:48px;font-weight:700;color:#F4EBDD">luz cálida, tonos tierra</p>
+</div>
+<div style="padding:18px 24px;display:flex;flex-direction:column;gap:4px"><p style="font-size:24px;font-weight:700">Fotografía</p><p style="font-size:24px;color:#6B5443">Luz natural, manos, tazas y laptops</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">20</p>
+<aside>Estos recursos se repiten en todas las piezas y hacen que la marca se reconozca aunque no aparezca el logo: el cursor, la ventana de terminal, el patrón de granos y bits, las etiquetas de código, los íconos y el estilo de fotografía.</aside>
+</section>
+<section class="slide" id="aplicaciones" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">02 · LOOK &amp; FEEL · APLICACIONES</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">La marca en el mundo real</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:48px;align-items:flex-end">
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:20px">
+<div style="display:flex;flex-direction:column;align-items:center">
+<div style="width:250px;height:36px;background:#8A5A3B;border-radius:18px"></div>
+<div style="width:220px;height:340px;background:#F4EBDD;border-radius:6px 6px 44px 44px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:28px 0 40px">
+<p style="font-family:'Caveat', cursive;font-size:56px;font-weight:700;color:#24170F;transform:rotate(-6deg)">Andrés</p>
+<div style="width:220px;height:130px;background:#24170F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+<svg aria-label="Isotipo en la faja del vaso" viewBox="0 0 120 120" width="120" height="120" style="width:60px;height:60px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800;color:#F4EBDD">rollback<span style="color:#34D27B">_</span></p>
+</div>
+<div style="height:10px"></div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><p style="font-size:24px;font-weight:700">Vaso para llevar</p><p style="font-size:24px;color:#BFAE98">El nombre, escrito a mano</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:20px">
+<div style="width:430px;background:#FBF6EE;color:#24170F;border-radius:8px;padding:28px 32px;display:flex;flex-direction:column;gap:6px;font-family:'JetBrains Mono', 'Courier New', monospace">
+<p style="font-size:32px;font-weight:800;text-align:center">rollback<span style="color:#1C7A45">_</span></p>
+<p style="font-size:24px;text-align:center;color:#6B5443">TX #4F2A1C · 21/11 08:15</p>
+<hr style="border-top:2px dashed #CDBBA2">
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px">Latte Foráneo</p><p style="font-size:24px">3,50</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px">Mocha NULL</p><p style="font-size:24px">3,80</p></div>
+<div style="display:flex;justify-content:space-between"><p style="font-size:24px;font-weight:800">TOTAL $</p><p style="font-size:24px;font-weight:800">7,30</p></div>
+<hr style="border-top:2px dashed #CDBBA2">
+<p style="font-size:24px;font-weight:800;color:#1C7A45">ESTADO: CONFIRMADO</p>
+<p style="font-size:24px;color:#6B5443">¿Algo falló? Pide tu rollback.</p>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><p style="font-size:24px;font-weight:700">Ticket como log</p><p style="font-size:24px;color:#BFAE98">Cada compra es una transacción</p></div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:20px">
+<div style="width:320px;background:#8A5A3B;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;align-items:center;gap:12px">
+<div style="width:256px;height:18px;background:#6E452C;border-radius:9px"></div>
+<svg aria-label="Isotipo en la bolsa de café" viewBox="0 0 120 120" width="120" height="120" style="width:64px;height:64px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#F4EBDD" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#F4EBDD">rollback_</p>
+<p style="font-size:24px;color:#F4EBDD;text-align:center">Café de origen venezolano</p>
+<div style="background:#F4EBDD;border-radius:10px;padding:10px;display:flex">
+<svg aria-label="Código QR con el linaje del grano" viewBox="0 0 21 21" width="21" height="21" style="width:104px;height:104px" xmlns="http://www.w3.org/2000/svg"><rect width="21" height="21" fill="#F4EBDD"/><g fill="#24170F"><rect x="0" y="0" width="7" height="7"/><rect x="14" y="0" width="7" height="7"/><rect x="0" y="14" width="7" height="7"/></g><g fill="#F4EBDD"><rect x="1" y="1" width="5" height="5"/><rect x="15" y="1" width="5" height="5"/><rect x="1" y="15" width="5" height="5"/></g><g fill="#24170F"><rect x="2" y="2" width="3" height="3"/><rect x="16" y="2" width="3" height="3"/><rect x="2" y="16" width="3" height="3"/><path d="M8 0h1v1h-1zM10 0h2v1h-2zM12 1h1v1h-1zM9 2h1v2h-1zM11 3h2v1h-2zM8 4h1v1h-1zM12 5h1v1h-1zM10 6h1v1h-1zM8 6h1v1h-1zM0 8h1v1h-1zM2 8h2v1h-2zM5 9h1v1h-1zM7 8h1v1h-1zM9 8h1v1h-1zM11 9h1v1h-1zM13 8h1v1h-1zM15 9h2v1h-2zM17 8h1v1h-1zM19 10h1v1h-1zM1 10h1v1h-1zM3 11h1v1h-1zM6 11h1v1h-1zM8 12h1v1h-1zM10 10h1v2h-1zM12 12h1v1h-1zM14 11h1v1h-1zM16 12h1v1h-1zM18 13h1v1h-1zM20 12h1v1h-1zM8 14h1v1h-1zM10 15h1v1h-1zM12 16h1v1h-1zM9 17h1v1h-1zM11 18h1v1h-1zM13 19h1v1h-1zM8 20h1v1h-1zM15 15h1v1h-1zM17 16h1v1h-1zM19 17h1v1h-1zM16 18h1v1h-1zM18 19h1v1h-1zM20 20h1v1h-1zM14 20h1v1h-1zM16 14h1v1h-1zM19 15h1v1h-1zM10 19h1v1h-1zM12 13h1v1h-1zM14 17h1v1h-1z"/></g></svg>
+</div>
+<p style="font-size:24px;color:#F4EBDD;text-align:center">Escanea el linaje del grano</p>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px"><p style="font-size:24px;font-weight:700">Bolsa de café</p><p style="font-size:24px;color:#BFAE98">QR con finca, altitud y tueste</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">21</p>
+<aside>Así se aplica la identidad en el local. El vaso lleva el nombre escrito a mano, con la tipografía Caveat. El ticket parece el registro de una transacción. La bolsa trae un QR con el linaje del grano, un concepto de ingeniería de datos convertido en trazabilidad del café.</aside>
+</section>
+<section class="slide" id="p3" data-transition="push" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;justify-content:center;gap:32px">
+<div style="width:900px;display:flex;flex-direction:column;gap:32px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">PARTE 03</p>
+<h1 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;letter-spacing:-3px;line-height:1">Plan de medios<span style="color:#34D27B">_</span></h1>
+<p style="font-size:32px;color:#D9CBB8;line-height:1.4">Pilares, iniciativas y la grilla de lanzamiento con nueve publicaciones listas para salir.</p>
+</div>
+<div data-build-in="rise" style="position:absolute;left:1056px;top:330px;width:736px;background:#1A100A;border:2px solid #4A3527;border-radius:24px;padding:48px;display:flex;flex-direction:column;gap:8px;font-family:'JetBrains Mono', 'Courier New', monospace">
+<p style="font-size:32px;line-height:1.5"><span style="color:#34D27B">INSERT INTO</span> feed</p>
+<p style="font-size:32px;line-height:1.5"><span style="color:#34D27B">VALUES</span> (9 posts)</p>
+<p style="font-size:32px;line-height:1.5;color:#BFAE98">-- del 2 al 20 de nov</p>
+<p style="font-size:32px;line-height:1.5;color:#34D27B">COMMIT</p>
+</div>
+<aside>Tercera parte: la estrategia de comunicación en redes. Aquí se ve la marca en acción con las nueve publicaciones del lanzamiento.</aside>
+</section>
+<section class="slide" id="plataformas" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">03 · PLAN DE MEDIOS</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Objetivo y plataformas</h2>
+<p style="font-size:32px;line-height:1.4;background:#24170F;color:#F4EBDD;border-radius:20px;padding:28px 36px"><b style="color:#34D27B">Objetivo del lanzamiento:</b> dar a conocer Rollback en la comunidad universitaria y tech de Caracas y llevar a los primeros clientes al local en tres semanas.</p>
+<div style="flex:1"></div>
+<div style="display:flex;gap:32px">
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-top:10px solid #1C7A45;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PRINCIPAL</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">Instagram</h3>
+<p style="font-size:24px;line-height:1.4"><b>Formatos:</b> posts, carruseles, reels e historias.</p>
+<p style="font-size:24px;line-height:1.4;color:#5A4334"><b style="color:#24170F">Por qué:</b> es donde nuestro público descubre cafés y lugares nuevos.</p>
+<p style="font-size:24px;line-height:1.4;color:#5A4334"><b style="color:#24170F">Frecuencia:</b> 3 posts por semana e historias diarias.</p>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-top:10px solid #E09A3E;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#8A5A3B">ALCANCE</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">TikTok</h3>
+<p style="font-size:24px;line-height:1.4"><b>Formatos:</b> videos cortos de preparación, humor y POV.</p>
+<p style="font-size:24px;line-height:1.4;color:#5A4334"><b style="color:#24170F">Por qué:</b> el formato ideal para llegar a jóvenes de 18 a 25 años.</p>
+<p style="font-size:24px;line-height:1.4;color:#5A4334"><b style="color:#24170F">Frecuencia:</b> 2 videos por semana.</p>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-top:10px solid #24170F;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#5A4334">CONVERSIÓN</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700">WhatsApp Business</h3>
+<p style="font-size:24px;line-height:1.4"><b>Formatos:</b> catálogo, pedidos para llevar y canal de novedades.</p>
+<p style="font-size:24px;line-height:1.4;color:#5A4334"><b style="color:#24170F">Por qué:</b> convierte a los seguidores en clientes.</p>
+<p style="font-size:24px;line-height:1.4;color:#5A4334"><b style="color:#24170F">Frecuencia:</b> 2 mensajes por semana.</p>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">23</p>
+<aside>Instagram es la vitrina principal, TikTok da alcance entre los más jóvenes y WhatsApp Business convierte el interés en visitas y pedidos. Cada plataforma tiene un rol distinto dentro del embudo.</aside>
+</section>
+<section class="slide" id="pilares" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">03 · PLAN DE MEDIOS · PILARES DE CONTENIDO</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Cuatro pilares, un mismo tono</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-top:12px solid #E09A3E;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#E09A3E">01</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Código fuente</h3>
+<p style="font-size:24px;letter-spacing:2px;color:#E09A3E">PRODUCTO Y ORIGEN</p>
+<p style="font-size:24px;line-height:1.4;color:#D9CBB8">El café, el menú, la garantía rollback y la historia del grano.</p>
+<p style="font-size:24px;line-height:1.4;color:#F4EBDD"><b>Objetivo:</b> dar a conocer la oferta.</p>
+<div style="flex:1"></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1;color:#E09A3E">30 %</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-top:12px solid #C9A27E;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#C9A27E">02</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Modo foco</h3>
+<p style="font-size:24px;letter-spacing:2px;color:#C9A27E">VALOR Y UTILIDAD</p>
+<p style="font-size:24px;line-height:1.4;color:#D9CBB8">Tips de estudio y productividad, y los espacios para concentrarse.</p>
+<p style="font-size:24px;line-height:1.4;color:#F4EBDD"><b>Objetivo:</b> ser útiles y ganar guardados.</p>
+<div style="flex:1"></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1;color:#C9A27E">25 %</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-top:12px solid #F4EBDD;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#F4EBDD">03</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Commit diario</h3>
+<p style="font-size:24px;letter-spacing:2px;color:#F4EBDD">HUMOR Y CULTURA TECH</p>
+<p style="font-size:24px;line-height:1.4;color:#D9CBB8">Memes y chistes del día a día de estudiantes y programadores.</p>
+<p style="font-size:24px;line-height:1.4;color:#F4EBDD"><b>Objetivo:</b> alcance y compartidos.</p>
+<div style="flex:1"></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1;color:#F4EBDD">25 %</p>
+</div>
+<div style="flex:1;background:#2E1F16;border:2px solid #4A3527;border-top:12px solid #34D27B;border-radius:20px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#34D27B">04</p>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Pull request</h3>
+<p style="font-size:24px;letter-spacing:2px;color:#34D27B">COMUNIDAD</p>
+<p style="font-size:24px;line-height:1.4;color:#D9CBB8">Retos, eventos, clientes y contenido creado por la comunidad.</p>
+<p style="font-size:24px;line-height:1.4;color:#F4EBDD"><b>Objetivo:</b> interacción y visitas.</p>
+<div style="flex:1"></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1;color:#34D27B">20 %</p>
+</div>
+</div>
+<p style="font-size:24px;color:#BFAE98">El porcentaje indica qué parte del contenido total ocupa cada pilar.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">24</p>
+<aside>Los pilares son los grandes temas de los que habla la marca. Sus nombres también vienen del mundo del código: el código fuente es el producto, el modo foco es la utilidad, el commit diario es el humor y el pull request es la comunidad que aporta.</aside>
+</section>
+<section class="slide" id="iniciativas" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">03 · PLAN DE MEDIOS · INICIATIVAS</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Qué publicamos en cada pilar</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:24px;align-items:stretch">
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;background:#E09A3E;color:#24170F;padding:14px 24px">01 · CÓDIGO FUENTE</p>
+<div style="padding:20px 24px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Changelog del menú</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Cada bebida, como una actualización de software.</p><p style="font-size:24px;color:#8A5A3B">Carrusel IG · semanal</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Linaje del grano</p><p style="font-size:24px;line-height:1.35;color:#5A4334">La historia de la finca detrás de cada café.</p><p style="font-size:24px;color:#8A5A3B">Reels y TikTok · 2 al mes</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Términos y condiciones</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Las políticas de la casa, explicadas con humor.</p><p style="font-size:24px;color:#8A5A3B">Post IG · 2 al mes</p></div>
+</div>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;background:#C9A27E;color:#24170F;padding:14px 24px">02 · MODO FOCO</p>
+<div style="padding:20px 24px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Pomodoro &amp; espresso</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Técnicas de estudio con pausas de café.</p><p style="font-size:24px;color:#8A5A3B">Carrusel IG · semanal</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Zona aislamiento</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Recorridos por los espacios para concentrarse.</p><p style="font-size:24px;color:#8A5A3B">Reels y TikTok · 2 al mes</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Playlist de deploy</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Música para trabajar, cada viernes.</p><p style="font-size:24px;color:#8A5A3B">Historias · semanal</p></div>
+</div>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;background:#24170F;color:#F4EBDD;padding:14px 24px">03 · COMMIT DIARIO</p>
+<div style="padding:20px 24px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Error 404</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Memes del día a día con solución cafetera.</p><p style="font-size:24px;color:#8A5A3B">Post IG y TikTok · semanal</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Diccionario rollback</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Términos tech explicados con café.</p><p style="font-size:24px;color:#8A5A3B">Post IG · 2 al mes</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">POV del barista</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Situaciones graciosas del local en video.</p><p style="font-size:24px;color:#8A5A3B">TikTok · semanal</p></div>
+</div>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;background:#1C7A45;color:#F4EBDD;padding:14px 24px">04 · PULL REQUEST</p>
+<div style="padding:20px 24px;display:flex;flex-direction:column;gap:18px">
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Cuenta regresiva</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Expectativa antes de la apertura.</p><p style="font-size:24px;color:#8A5A3B">Post e historias · lanzamiento</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Wifi challenge</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Un acertijo semanal para ganar la clave.</p><p style="font-size:24px;color:#8A5A3B">Historias · semanal</p></div>
+<div style="display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Merge comunitario</p><p style="font-size:24px;line-height:1.35;color:#5A4334">Fotos de clientes y noches Code &amp; Coffee.</p><p style="font-size:24px;color:#8A5A3B">IG y WhatsApp · 2 al mes</p></div>
+</div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">25</p>
+<aside>Cada pilar tiene tres iniciativas concretas, con su formato, plataforma y frecuencia. Así el contenido nunca se improvisa: siempre responde a un pilar.</aside>
+</section>
+<section class="slide" id="grilla" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:64px;align-items:center">
+<div style="width:476px;flex:none;background:#FBF6EE;border-radius:32px;padding:24px;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 64px rgba(36,23,15,0.22)">
+<div style="display:flex;gap:16px;align-items:center">
+<div style="width:72px;height:72px;flex:none;border-radius:50%;background:#34D27B;display:flex;align-items:center;justify-content:center">
+<svg aria-label="Foto de perfil con el isotipo" viewBox="0 0 120 120" width="120" height="120" style="width:50px;height:50px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#24170F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+</div>
+<div style="display:flex;flex-direction:column">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">rollback.cafe</p>
+<p style="font-size:24px;color:#6B5443">Cafetería · Caracas</p>
+</div>
+</div>
+<p style="font-size:24px;line-height:1.35">Si el día falla, haz rollback_<br>Apertura: sáb 21/11 · 8:00 a. m.</p>
+<div style="display:grid;grid-template-columns:140px 140px 140px;gap:4px">
+<div style="height:175px;background:#24170F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#34D27B">deploy ✓</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#F4EBDD">21 NOV</p></div>
+<div style="height:175px;background:#F4EBDD;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px"><span class="xi" role="img" aria-hidden="true" style="color:#24170F;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+</svg></span><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">foco</p></div>
+<div style="height:175px;background:#24170F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#F4EBDD">¿falló?</p><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800;color:#34D27B">rollback</p></div>
+<div style="height:175px;background:#F4EBDD;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:56px;font-weight:800">404</p></div>
+<div style="height:175px;background:#24170F;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;color:#34D27B">25:00</p></div>
+<div style="height:175px;background:#F4EBDD;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800">v1.0</p><p style="font-size:24px;color:#6B5443">menú</p></div>
+<div style="height:175px;background:#24170F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800;color:#F4EBDD">roll·back</p><p style="font-size:24px;color:#E09A3E">(s.)</p></div>
+<div style="height:175px;background:#F4EBDD;display:flex;align-items:center;justify-content:center">
+<svg aria-label="Miniatura con el isotipo" viewBox="0 0 120 120" width="120" height="120" style="width:80px;height:80px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#1C7A45" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+</div>
+<div style="height:175px;background:#24170F;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:16px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#34D27B">87 %</p><div style="height:10px;background:#3A2A20;border-radius:5px;display:flex"><div style="width:87%;background:#34D27B;border-radius:5px"></div></div></div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">03 · PLAN DE MEDIOS · GRILLA</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Así se ve el feed</h2>
+<p style="font-size:24px;line-height:1.45;color:#5A4334">Patrón de tablero: alternamos piezas oscuras y claras para que el perfil se vea ordenado desde el primer vistazo. Instagram muestra primero lo más reciente, así que la publicación 9 queda arriba a la izquierda.</p>
+<table style="font-size:24px;color:#24170F">
+<tr><th style="width:6%">#</th><th style="width:46%">Publicación</th><th style="width:28%">Pilar</th><th style="width:20%">Fecha</th></tr>
+<tr><td>1</td><td>Teaser: algo se compila</td><td>Pull request</td><td>Lun 2 nov</td></tr>
+<tr><td>2</td><td>Revelación del logo</td><td>Pull request</td><td>Mié 4 nov</td></tr>
+<tr><td>3</td><td>Diccionario rollback</td><td>Commit diario</td><td>Vie 6 nov</td></tr>
+<tr><td>4</td><td>Menú v1.0 · carrusel</td><td>Código fuente</td><td>Lun 9 nov</td></tr>
+<tr><td>5</td><td>Pomodoro &amp; espresso</td><td>Modo foco</td><td>Mié 11 nov</td></tr>
+<tr><td>6</td><td>Error 404</td><td>Commit diario</td><td>Vie 13 nov</td></tr>
+<tr><td>7</td><td>Garantía rollback</td><td>Código fuente</td><td>Lun 16 nov</td></tr>
+<tr><td>8</td><td>Zona aislamiento · reel</td><td>Modo foco</td><td>Mié 18 nov</td></tr>
+<tr><td>9</td><td>Inauguración y Wifi challenge</td><td>Pull request</td><td>Vie 20 nov</td></tr>
+</table>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">26</p>
+<aside>Esta es la vista previa del perfil de Instagram con las nueve publicaciones. Las piezas alternan fondo oscuro y claro para formar un tablero. En las siguientes láminas se ve cada publicación en detalle, con su arte y su caption.</aside>
+</section>
+<section class="slide" id="post1" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#24170F;color:#F4EBDD;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.28);padding:48px;display:flex;flex-direction:column;justify-content:space-between;font-family:'JetBrains Mono', 'Courier New', monospace">
+<p style="font-size:24px;color:#BFAE98">rollback.cafe</p>
+<div style="background:#1A100A;border:2px solid #4A3527;border-radius:20px;display:flex;flex-direction:column;overflow:hidden">
+<div style="display:flex;gap:10px;padding:16px 20px;background:#2E1F16"><div style="width:14px;height:14px;border-radius:50%;background:#E5484D"></div><div style="width:14px;height:14px;border-radius:50%;background:#E09A3E"></div><div style="width:14px;height:14px;border-radius:50%;background:#34D27B"></div></div>
+<div style="padding:28px;display:flex;flex-direction:column;gap:18px">
+<p style="font-size:24px"><span style="color:#34D27B">$</span> compilando rollback…</p>
+<div style="height:20px;background:#3A2A20;border-radius:10px;display:flex"><div style="width:87%;background:#34D27B;border-radius:10px"></div></div>
+<p style="font-size:24px;color:#BFAE98">87 % · no apagues tu equipo</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:44px;font-weight:800;line-height:1.15">Algo se está compilando en Caracas.</p>
+<p style="font-family:'Caveat', cursive;font-size:48px;font-weight:700;color:#E09A3E">muy pronto…</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 01 / 09 · LUN 2 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Teaser: algo se está compilando</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#1C7A45;color:#F4EBDD;border-radius:999px;padding:6px 18px">Pull request</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Cuenta regresiva</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Post + historias</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram · TikTok</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Algo se está compilando en Caracas ☕⏳</p>
+<p style="font-size:24px;line-height:1.45">Un lugar donde los días difíciles se pueden deshacer. Todavía no podemos contarte mucho, pero el progreso ya va por 87 %.</p>
+<p style="font-size:24px;line-height:1.45">Activa las notificaciones para no perderte el deploy 🔔</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#RollbackCafe #ProximamenteCaracas #CafeDeEspecialidad #Caracas</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> genera curiosidad sin revelar la marca. La barra de progreso habla el lenguaje tech y en TikTok se publica como video de la barra avanzando.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">27</p>
+<aside>Publicación 1, el teaser. Abre la campaña con misterio: no muestra el logo, solo una terminal compilando algo. Pertenece al pilar Pull request, iniciativa Cuenta regresiva.</aside>
+</section>
+<section class="slide" id="post2" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#F4EBDD;color:#24170F;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.22);padding:56px 48px;display:flex;flex-direction:column;align-items:center;justify-content:space-between">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700;color:#1C7A45">Hola, mundo.</p>
+<div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+<svg aria-label="Isotipo de Rollback" viewBox="0 0 120 120" width="120" height="120" style="width:220px;height:220px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#1C7A45" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;letter-spacing:-2px;line-height:1">rollback<span style="color:#1C7A45">_</span></p>
+<p style="font-size:32px;color:#5A4334">La cafetería transaccional</p>
+</div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">próximamente · Caracas</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 02 / 09 · MIÉ 4 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Revelación: hola, mundo</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#1C7A45;color:#F4EBDD;border-radius:999px;padding:6px 18px">Pull request</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Cuenta regresiva</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Post</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Hola, mundo 👋</p>
+<p style="font-size:24px;line-height:1.45">Somos Rollback, la primera cafetería transaccional de Caracas. En bases de datos, un rollback deshace lo que salió mal y devuelve todo a su último estado estable. Eso queremos ser para tu día: el botón de deshacer, en forma de café.</p>
+<p style="font-size:24px;line-height:1.45">Abrimos muy pronto. Síguenos para ser parte del primer commit.</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#RollbackCafe #HolaMundo #CafeteriaCaracas</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> “Hola, mundo” es lo primero que escribe todo programador. Es la forma perfecta de presentar la marca y explicar su nombre.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">28</p>
+<aside>Publicación 2, la revelación del logo. Usa el famoso “Hola, mundo” de la programación y explica el significado del nombre en el caption.</aside>
+</section>
+<section class="slide" id="post3" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#24170F;color:#F4EBDD;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.28);padding:48px;display:flex;flex-direction:column;justify-content:space-between">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#E09A3E">DICCIONARIO ROLLBACK · #001</p>
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;letter-spacing:-2px;line-height:1.1">rollback</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">/ról·bak/ · sustantivo</p>
+</div>
+<hr style="border-top:2px solid #4A3527">
+<p style="font-size:32px;line-height:1.35">1. En bases de datos: deshacer una transacción que falló.</p>
+<p style="font-size:32px;line-height:1.35">2. En la vida: tomarte un café y <span style="color:#34D27B">volver a tu mejor versión</span>.</p>
+<p style="font-family:'Caveat', cursive;font-size:44px;font-weight:600;line-height:1.1;color:#E09A3E">Ej.: “Tuve un lunes horrible, voy a hacer rollback.”</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">rollback<span style="color:#34D27B">_</span></p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 03 / 09 · VIE 6 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Diccionario rollback #001</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#24170F;color:#F4EBDD;border-radius:999px;padding:6px 18px">Commit diario</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Diccionario rollback</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Post</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Nueva palabra para tu vocabulario 📖</p>
+<p style="font-size:24px;line-height:1.45">No necesitas saber programar para hacer rollback. Solo necesitas un mal día y ganas de empezar de nuevo (y un buen café, claro).</p>
+<p style="font-size:24px;line-height:1.45">Guarda este post para cuando lo necesites y etiqueta a la persona que más rollbacks necesita esta semana 👇</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#DiccionarioRollback #RollbackCafe #HumorProgramador</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> explica el nombre de la marca con humor y en palabras simples. Invita a guardar y etiquetar, lo que multiplica el alcance.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">29</p>
+<aside>Publicación 3, primera entrega del Diccionario rollback. Formato de entrada de diccionario para explicar el término a quienes no son del mundo tech.</aside>
+</section>
+<section class="slide" id="post4" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#F4EBDD;color:#24170F;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.22);padding:48px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:6px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">CHANGELOG</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;letter-spacing:-2px;line-height:1.1">Menú v1.0</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div style="display:flex;gap:16px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#1C7A45;line-height:1">+</p><div style="display:flex;flex-direction:column"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">Espresso Primario</p><p style="font-size:24px;color:#6B5443">la clave de todo</p></div></div>
+<div style="display:flex;gap:16px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#1C7A45;line-height:1">+</p><div style="display:flex;flex-direction:column"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">Latte Foráneo</p><p style="font-size:24px;color:#6B5443">se relaciona con cualquier postre</p></div></div>
+<div style="display:flex;gap:16px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#1C7A45;line-height:1">+</p><div style="display:flex;flex-direction:column"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">Americano Normalizado</p><p style="font-size:24px;color:#6B5443">sin redundancias</p></div></div>
+<div style="display:flex;gap:16px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#1C7A45;line-height:1">+</p><div style="display:flex;flex-direction:column"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">Mocha NULL</p><p style="font-size:24px;color:#6B5443">todo el sabor, cero azúcar</p></div></div>
+<div style="display:flex;gap:16px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#1C7A45;line-height:1">+</p><div style="display:flex;flex-direction:column"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">Cold Brew Indexado</p><p style="font-size:24px;color:#6B5443">encuentra energía más rápido</p></div></div>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div style="display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#24170F"></div><div style="width:12px;height:12px;border-radius:50%;background:#CDBBA2"></div><div style="width:12px;height:12px;border-radius:50%;background:#CDBBA2"></div><div style="width:12px;height:12px;border-radius:50%;background:#CDBBA2"></div><div style="width:12px;height:12px;border-radius:50%;background:#CDBBA2"></div><div style="width:12px;height:12px;border-radius:50%;background:#CDBBA2"></div></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">desliza →</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 04 / 09 · LUN 9 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Release notes del menú</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#E09A3E;color:#24170F;border-radius:999px;padding:6px 18px">Código fuente</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Changelog del menú</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Carrusel · 6 láminas</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Release notes del menú v1.0 ☕</p>
+<p style="font-size:24px;line-height:1.45">Nuevo: Espresso Primario, la clave de todo.<br>Nuevo: Latte Foráneo, se relaciona con cualquier postre.<br>Nuevo: Mocha NULL, todo el sabor y cero azúcar.<br>Nuevo: Cold Brew Indexado, para encontrar energía más rápido.</p>
+<p style="font-size:24px;line-height:1.45">Desliza para conocer cada bebida y cuéntanos en los comentarios cuál pedirías primero 👇</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#MenuRollback #CafeDeEspecialidad #RollbackCafe</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> presenta el menú como las notas de versión de un software. Cada lámina del carrusel muestra una bebida con su foto y su precio.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">30</p>
+<aside>Publicación 4, el menú presentado como changelog. Los nombres de las bebidas son juegos de palabras con conceptos de bases de datos: clave primaria, clave foránea, normalización, NULL e índices.</aside>
+</section>
+<section class="slide" id="post5" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#24170F;color:#F4EBDD;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.28);padding:48px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:10px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#34D27B">MODO FOCO</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;line-height:1.15">Pomodoro &amp; espresso</p>
+</div>
+<div style="display:flex;gap:8px;align-items:center">
+<div style="width:72px;height:96px;background:#34D27B;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#24170F">25</p></div>
+<div style="width:32px;height:96px;background:#E09A3E;border-radius:8px;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800;color:#24170F">5</p></div>
+<div style="width:72px;height:96px;background:#34D27B;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#24170F">25</p></div>
+<div style="width:32px;height:96px;background:#E09A3E;border-radius:8px;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800;color:#24170F">5</p></div>
+<div style="width:72px;height:96px;background:#34D27B;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#24170F">25</p></div>
+<div style="width:32px;height:96px;background:#E09A3E;border-radius:8px;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800;color:#24170F">5</p></div>
+<div style="width:72px;height:96px;background:#34D27B;border-radius:10px;display:flex;align-items:center;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800;color:#24170F">25</p></div>
+<svg aria-label="Taza de café como pausa larga" viewBox="0 0 120 120" width="120" height="120" style="width:64px;height:64px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:32px;line-height:1.35">25 min de foco + 5 de pausa = <span style="color:#34D27B">1 commit</span>.</p>
+<p style="font-size:24px;line-height:1.4;color:#BFAE98">Cada 4 commits, te ganaste un café y una pausa larga.</p>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div style="display:flex;gap:8px"><div style="width:12px;height:12px;border-radius:50%;background:#34D27B"></div><div style="width:12px;height:12px;border-radius:50%;background:#4A3527"></div><div style="width:12px;height:12px;border-radius:50%;background:#4A3527"></div><div style="width:12px;height:12px;border-radius:50%;background:#4A3527"></div><div style="width:12px;height:12px;border-radius:50%;background:#4A3527"></div></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">desliza →</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 05 / 09 · MIÉ 11 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Pomodoro &amp; espresso</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#C9A27E;color:#24170F;border-radius:999px;padding:6px 18px">Modo foco</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Pomodoro &amp; espresso</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Carrusel · 5 láminas</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">¿Semana de parciales? Te compartimos nuestro método favorito ⏱️</p>
+<p style="font-size:24px;line-height:1.45">1. Trabaja 25 minutos sin distracciones.<br>2. Descansa 5 minutos.<br>3. Repite cuatro veces y date una pausa larga con café.</p>
+<p style="font-size:24px;line-height:1.45">Cada bloque terminado es un commit a tu proyecto. Guarda este post y pruébalo en nuestra Zona Aislamiento cuando abramos.</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#ModoFoco #TecnicaPomodoro #EstudiaConCafe</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> es contenido útil que la gente guarda y comparte. Une la técnica Pomodoro con el lenguaje de la marca y adelanta la Zona Aislamiento.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">31</p>
+<aside>Publicación 5, contenido de valor del pilar Modo foco. Enseña la técnica Pomodoro, muy útil para estudiantes en época de exámenes, y la conecta con la idea de commit.</aside>
+</section>
+<section class="slide" id="post6" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#F4EBDD;color:#24170F;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.22);padding:48px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;overflow:hidden;display:flex;flex-direction:column">
+<div style="display:flex;gap:10px;align-items:center;padding:12px 18px;background:#E9DCC8">
+<div style="width:14px;height:14px;border-radius:50%;background:#E5484D"></div><div style="width:14px;height:14px;border-radius:50%;background:#E09A3E"></div><div style="width:14px;height:14px;border-radius:50%;background:#34D27B"></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;background:#FBF6EE;border-radius:8px;padding:2px 12px;color:#5A4334">rollback.cafe/energia</p>
+</div>
+<div style="padding:28px 32px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;line-height:1;letter-spacing:-4px">404</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800">Energía no encontrada</p>
+<p style="font-size:24px;color:#6B5443">Tu cerebro no responde desde las 7 a. m.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:6px">
+<p style="font-size:24px;color:#6B5443">Solución sugerida:</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:800">1 cortado doble</p>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;background:#1C7A45;color:#F4EBDD;border-radius:12px;padding:12px 24px">↺ Reintentar</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">rollback<span style="color:#1C7A45">_</span></p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 06 / 09 · VIE 13 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Error 404: energía no encontrada</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#24170F;color:#F4EBDD;border-radius:999px;padding:6px 18px">Commit diario</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Error 404</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Post + video</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram · TikTok</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Cuando abres la laptop a las 7 a. m. y tu cerebro responde con un 404 😵</p>
+<p style="font-size:24px;line-height:1.45">Tranquilo, el error tiene una solución conocida: un cortado doble y volver a intentarlo.</p>
+<p style="font-size:24px;line-height:1.45">Etiqueta a quien vive en modo 404 los lunes 👇</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#Error404 #MemesDeProgramadores #RollbackCafe</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> es humor que cualquiera entiende, porque todos hemos visto una página de error 404. En TikTok se adapta como un video POV.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">32</p>
+<aside>Publicación 6, un meme del pilar Commit diario. Usa la conocida página de error 404 para hablar del cansancio de las mañanas, con el café como solución.</aside>
+</section>
+<section class="slide" id="post7" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#24170F;color:#F4EBDD;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.28);padding:48px;display:flex;flex-direction:column;justify-content:space-between">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#E09A3E">TÉRMINOS Y CONDICIONES</p>
+<div style="display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;letter-spacing:-2px;line-height:1.1">¿Tu pedido falló?</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;letter-spacing:-2px;line-height:1.1;color:#34D27B">Lo revertimos.</p>
+</div>
+<div style="border-top:2px solid #4A3527;padding:20px 0 0;display:flex;flex-direction:column;gap:10px">
+<p style="font-size:24px;line-height:1.4;color:#D9CBB8">Art. 1 · Si tu bebida no sale como la pediste, la preparamos de nuevo sin costo.</p>
+<p style="font-size:24px;line-height:1.4;color:#BFAE98">Art. 2 · No hay letra pequeña. Bueno, solo esta.</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 07 / 09 · LUN 16 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">La garantía rollback</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#E09A3E;color:#24170F;border-radius:999px;padding:6px 18px">Código fuente</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Términos y condiciones</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Post</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Leímos los términos y condiciones por ti (y también los escribimos) 📜</p>
+<p style="font-size:24px;line-height:1.45">En Rollback, si tu bebida no sale como la pediste, la preparamos de nuevo sin costo. Sin discusiones y sin caras largas. Así de simple es nuestra garantía rollback.</p>
+<p style="font-size:24px;line-height:1.45">Porque en una buena base de datos, y en una buena cafetería, los errores se pueden deshacer.</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#GarantiaRollback #RollbackCafe #CafeteriaCaracas</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> comunica la promesa de marca de forma directa y convierte una política del local en un diferenciador frente a la competencia.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">33</p>
+<aside>Publicación 7, la promesa de marca hecha publicación. Presenta la garantía rollback con el formato de unos términos y condiciones, pero con humor y sin letra pequeña.</aside>
+</section>
+<section class="slide" id="post8" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#F4EBDD;color:#24170F;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.22);padding:48px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">ZONA AISLAMIENTO</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;line-height:1.15">Modo no molestar: activado</p>
+</div>
+<div style="position:relative;width:504px;height:250px;background:#E9DCC8;border-radius:20px">
+<span class="xi" role="img" aria-hidden="true" style="position:absolute;left:40px;top:118px;width:56px;height:56px;color:#1C7A45"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" />
+</svg></span>
+<div style="position:absolute;left:150px;top:56px;width:190px;height:124px;background:#24170F;border-radius:10px"></div>
+<div style="position:absolute;left:172px;top:80px;width:100px;height:10px;background:#34D27B;border-radius:5px"></div>
+<div style="position:absolute;left:172px;top:102px;width:140px;height:10px;background:#E09A3E;border-radius:5px"></div>
+<div style="position:absolute;left:172px;top:124px;width:80px;height:10px;background:#F4EBDD;border-radius:5px"></div>
+<div style="position:absolute;left:172px;top:146px;width:120px;height:10px;background:#8A5A3B;border-radius:5px"></div>
+<div style="position:absolute;left:128px;top:178px;width:234px;height:12px;background:#5A4334;border-radius:6px"></div>
+<div style="position:absolute;left:24px;top:196px;width:456px;height:16px;background:#8A5A3B;border-radius:8px"></div>
+<svg aria-label="Taza de Rollback sobre la mesa" viewBox="0 0 120 120" width="120" height="120" style="position:absolute;left:380px;top:122px;width:72px;height:72px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#1C7A45" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#24170F"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#24170F" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#24170F" stroke-width="6" stroke-linecap="round"/></svg>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">enchufe en cada mesa</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">wifi de respaldo</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">planta eléctrica</p>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:center">
+<p style="font-family:'Caveat', cursive;font-size:44px;font-weight:700;color:#8A5A3B">aquí se habla bajito</p>
+<div style="display:flex;gap:8px;align-items:center"><span class="xi" role="img" aria-hidden="true" style="color:#24170F;width:32px;height:32px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" />
+</svg></span><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">0:20</p></div>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 08 / 09 · MIÉ 18 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Conoce la Zona Aislamiento</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#C9A27E;color:#24170F;border-radius:999px;padding:6px 18px">Modo foco</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Zona aislamiento</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Reel · 20 s</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram · TikTok</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Te presentamos la Zona Aislamiento 🎧</p>
+<p style="font-size:24px;line-height:1.45">Un espacio pensado para concentrarte: enchufes en cada mesa, wifi de respaldo, planta eléctrica y una sola regla, aquí se habla bajito.</p>
+<p style="font-size:24px;line-height:1.45">Como en las bases de datos, tu trabajo no se mezcla con el de nadie más.</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#ModoFoco #EspaciosParaEstudiar #RollbackCafe</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> muestra el espacio y responde a las frustraciones del buyer persona: ruido, falta de enchufes y fallas de luz e internet.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">34</p>
+<aside>Publicación 8, un reel corto que recorre la Zona Aislamiento. Es el valor de aislamiento de ACID llevado al espacio físico, y responde directamente a lo que busca Andrés, nuestro buyer persona.</aside>
+</section>
+<section class="slide" id="reel8" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<video class="clip" src="media/reel.mp4" poster="media/reel-poster.png" aria-label="Reel animado de 20 segundos de la Zona Aislamiento de Rollback" playsinline loop preload="auto" style="width:428px;height:760px;object-fit:cover;border-radius:32px;border:10px solid #24170F;box-shadow:0 24px 64px rgba(36,23,15,0.3)"></video>
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 08 · EL REEL · 20 S · 9:16</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Del storyboard al video</h2>
+<table style="font-size:24px;color:#24170F">
+<tr><th style="width:14%">Tiempo</th><th style="width:46%">Qué se ve</th><th style="width:40%">Texto en pantalla</th></tr>
+<tr><td>0–3 s</td><td>La puerta del local se abre</td><td>Modo no molestar: activado</td></tr>
+<tr><td>3–8 s</td><td>Recorrido por las mesas con enchufes</td><td>Enchufe en cada mesa</td></tr>
+<tr><td>8–13 s</td><td>La laptop conectada, sin cortes</td><td>Wifi de respaldo</td></tr>
+<tr><td>13–17 s</td><td>El café llega a la mesa</td><td>Aquí se habla bajito</td></tr>
+<tr><td>17–20 s</td><td>Logo con el cursor parpadeando</td><td>Abrimos el 21 de nov</td></tr>
+</table>
+<p style="font-size:24px;line-height:1.45;color:#5A4334">Animado con la línea gráfica de la marca, con música lo-fi original y efectos sincronizados: la puerta, el teclado, la taza y el “shh”. Los textos siempre están en pantalla para quien lo ve sin sonido.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">35</p>
+<aside>Este es el reel de la publicación 8, hecho realidad. El video se reproduce solo en modo presentación y se puede pausar con un clic. A la derecha está el storyboard escena por escena. La música es original, creada para el reel, así que no tiene problemas de derechos de autor. Al inicio suena apagada, como escuchada desde afuera, y se abre cuando se abre la puerta.</aside>
+</section>
+<section class="slide" id="post9" data-transition="fade" style="background:#E9DCC8;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;gap:72px;align-items:center">
+<div style="width:600px;height:750px;flex:none;background:#24170F;color:#F4EBDD;border-radius:24px;box-shadow:0 24px 64px rgba(36,23,15,0.28);padding:48px;display:flex;flex-direction:column;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:6px;font-family:'JetBrains Mono', 'Courier New', monospace">
+<p style="font-size:24px;color:#BFAE98"><span style="color:#34D27B">$</span> deploy rollback --env=caracas</p>
+<p style="font-size:24px;font-weight:700;color:#34D27B">✓ deploy exitoso</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;letter-spacing:-2px;line-height:1.1">Abrimos</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:800;color:#34D27B">sábado 21 de nov</p>
+<p style="font-size:24px;color:#D9CBB8">8:00 a. m. · te esperamos</p>
+</div>
+<div style="background:#1A100A;border:2px solid #34D27B;border-radius:20px;padding:24px 26px;display:flex;flex-direction:column;gap:8px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#E09A3E">WIFI CHALLENGE #01</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;line-height:1.4"><span style="color:#34D27B">SELECT</span> nombre <span style="color:#34D27B">FROM</span> menu<br><span style="color:#34D27B">WHERE</span> azucar <span style="color:#34D27B">IS NULL</span></p>
+<p style="font-size:24px;line-height:1.4;color:#D9CBB8">La respuesta es la clave del wifi y tu primer café va por la casa.*</p>
+</div>
+<p style="font-size:24px;color:#BFAE98">*Para las primeras 50 personas.</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#1C7A45">PUBLICACIÓN 09 / 09 · VIE 20 NOV · 7:00 P. M.</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:44px;font-weight:700;line-height:1.2">Inauguración y Wifi challenge</h2>
+<div style="display:flex;flex-wrap:wrap;gap:10px">
+<p style="font-size:24px;background:#1C7A45;color:#F4EBDD;border-radius:999px;padding:6px 18px">Pull request</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Wifi challenge</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Post + historias</p>
+<p style="font-size:24px;border:2px solid #24170F;border-radius:999px;padding:4px 16px">Instagram · WhatsApp</p>
+</div>
+<div style="background:#FBF6EE;border:2px solid #DCCBB2;border-radius:20px;padding:28px 32px;display:flex;flex-direction:column;gap:12px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:2px;color:#6B5443">CAPTION</p>
+<p style="font-size:24px;line-height:1.45;font-weight:700">Deploy exitoso ✅ Abrimos este sábado 21 de noviembre a las 8:00 a. m.</p>
+<p style="font-size:24px;line-height:1.45">Para celebrar, llega el primer Wifi Challenge: resuelve la consulta de la imagen y dile la respuesta al barista. Las primeras 50 personas que acierten se llevan su primer café gratis ☕</p>
+<p style="font-size:24px;line-height:1.45">¿No sabes SQL? Pista: busca en nuestro menú la bebida sin azúcar 😉 Te esperamos para hacer commit juntos.</p>
+<p style="font-size:24px;line-height:1.45;color:#1C7A45">#Inauguracion #WifiChallenge #RollbackCafe #Caracas</p>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334"><b style="color:#24170F">Por qué funciona:</b> cierra el lanzamiento con una invitación concreta y un reto que lleva a la gente al local. La pista hace que nadie se quede por fuera.</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">36</p>
+<aside>Publicación 9, el anuncio de la apertura. La respuesta del acertijo es Mocha NULL, la bebida sin azúcar del menú, así que también refuerza la publicación 4. Convierte seguidores en visitas reales.</aside>
+</section>
+<section class="slide" id="calendario" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#34D27B">03 · PLAN DE MEDIOS · CALENDARIO</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">Tres semanas de lanzamiento</h2>
+<div style="flex:1"></div>
+<div style="display:grid;grid-template-columns:170px 1fr 1fr 1fr 1fr 1fr 1fr;gap:12px">
+<div></div>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#E09A3E">LUN</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#E09A3E">MAR</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#E09A3E">MIÉ</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#E09A3E">JUE</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#E09A3E">VIE</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700;color:#E09A3E">SÁB</p>
+<div style="display:flex;flex-direction:column;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Semana 1</p><p style="font-size:24px;color:#BFAE98">2 al 7 nov</p></div>
+<div style="background:#2E1F16;border-left:8px solid #34D27B;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P1 · Teaser</p><p style="font-size:24px;color:#34D27B">Pull request</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">TikTok</p><p style="font-size:24px;color:#D9CBB8">Video del progreso</p></div>
+<div style="background:#2E1F16;border-left:8px solid #34D27B;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P2 · Hola, mundo</p><p style="font-size:24px;color:#34D27B">Pull request</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">TikTok</p><p style="font-size:24px;color:#D9CBB8">POV del barista</p></div>
+<div style="background:#2E1F16;border-left:8px solid #F4EBDD;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P3 · Diccionario</p><p style="font-size:24px;color:#F4EBDD">Commit diario</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">Historias</p><p style="font-size:24px;color:#D9CBB8">Encuesta de bebidas</p></div>
+<div style="display:flex;flex-direction:column;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Semana 2</p><p style="font-size:24px;color:#BFAE98">9 al 14 nov</p></div>
+<div style="background:#2E1F16;border-left:8px solid #E09A3E;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P4 · Menú v1.0</p><p style="font-size:24px;color:#E09A3E">Código fuente</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">TikTok</p><p style="font-size:24px;color:#D9CBB8">Linaje del grano</p></div>
+<div style="background:#2E1F16;border-left:8px solid #C9A27E;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P5 · Pomodoro</p><p style="font-size:24px;color:#C9A27E">Modo foco</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">TikTok</p><p style="font-size:24px;color:#D9CBB8">POV del barista</p></div>
+<div style="background:#2E1F16;border-left:8px solid #F4EBDD;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P6 · Error 404</p><p style="font-size:24px;color:#F4EBDD">Commit diario</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">Historias</p><p style="font-size:24px;color:#D9CBB8">Wifi challenge</p></div>
+<div style="display:flex;flex-direction:column;justify-content:center"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:700">Semana 3</p><p style="font-size:24px;color:#BFAE98">16 al 21 nov</p></div>
+<div style="background:#2E1F16;border-left:8px solid #E09A3E;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P7 · Garantía</p><p style="font-size:24px;color:#E09A3E">Código fuente</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">TikTok</p><p style="font-size:24px;color:#D9CBB8">Zona aislamiento</p></div>
+<div style="background:#2E1F16;border-left:8px solid #C9A27E;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P8 · Zona</p><p style="font-size:24px;color:#C9A27E">Modo foco</p></div>
+<div style="border:2px dashed #4A3527;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;color:#BFAE98">TikTok</p><p style="font-size:24px;color:#D9CBB8">Cuenta regresiva</p></div>
+<div style="background:#2E1F16;border-left:8px solid #34D27B;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-size:24px;font-weight:700">P9 · Apertura</p><p style="font-size:24px;color:#34D27B">Pull request</p></div>
+<div style="background:#34D27B;color:#24170F;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;font-weight:800">APERTURA</p><p style="font-size:24px">8:00 a. m.</p></div>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#BFAE98">Feed a las 7:00 p. m. · Historias todos los días (playlist de deploy los viernes) · TikTok martes y jueves · WhatsApp martes y viernes.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#BFAE98">37</p>
+<aside>El calendario ordena las nueve publicaciones del feed los lunes, miércoles y viernes, y las combina con TikTok, historias y WhatsApp. Todo termina el sábado 21 con la apertura del local.</aside>
+</section>
+<section class="slide" id="kpis" data-transition="fade" style="background:#F4EBDD;color:#24170F;font-family:'DM Sans', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:24px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;letter-spacing:4px;color:#1C7A45">03 · PLAN DE MEDIOS · MEDICIÓN</p>
+<h2 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.1">¿Cómo sabremos que funcionó?</h2>
+<div style="flex:1"></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<span class="xi" role="img" aria-hidden="true" style="color:#1C7A45;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+  <path d="M2 12h20" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Alcance</h3>
+<p style="font-size:24px;line-height:1.4;color:#6B5443">Cuentas que ven el contenido</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1.1;color:#1C7A45">15.000</p>
+<p style="font-size:24px;line-height:1.4">cuentas alcanzadas en tres semanas</p>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<span class="xi" role="img" aria-hidden="true" style="color:#1C7A45;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <circle cx="9" cy="7" r="4" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Comunidad</h3>
+<p style="font-size:24px;line-height:1.4;color:#6B5443">Personas que nos siguen</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1.1;color:#1C7A45">1.000</p>
+<p style="font-size:24px;line-height:1.4">seguidores nuevos en Instagram</p>
+</div>
+<div style="flex:1;background:#FBF6EE;border:2px solid #E3D5C0;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<span class="xi" role="img" aria-hidden="true" style="color:#1C7A45;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" />
+  <path d="M7 10v12" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Interacción</h3>
+<p style="font-size:24px;line-height:1.4;color:#6B5443">Guardados, comentarios y compartidos</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1.1;color:#1C7A45">5 %</p>
+<p style="font-size:24px;line-height:1.4">de interacción promedio por publicación</p>
+</div>
+<div style="flex:1;background:#24170F;color:#F4EBDD;border:2px solid #24170F;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:12px">
+<span class="xi" role="img" aria-hidden="true" style="color:#34D27B;width:48px;height:48px"><svg
+ 
+  xmlns="http://www.w3.org/2000/svg"
+ 
+ 
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg></span>
+<h3 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;font-weight:700">Conversión</h3>
+<p style="font-size:24px;line-height:1.4;color:#BFAE98">Visitas reales al local</p>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:72px;font-weight:800;line-height:1.1;color:#34D27B">50</p>
+<p style="font-size:24px;line-height:1.4">cafés canjeados con el Wifi Challenge</p>
+</div>
+</div>
+<p style="font-size:24px;line-height:1.45;color:#5A4334">Metas propuestas para el lanzamiento. Se revisan cada semana con las estadísticas de Instagram y TikTok y con el conteo de cafés canjeados en caja.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:900px;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">rollback_ · proyecto de branding</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;text-align:right;font-family:'JetBrains Mono', 'Courier New', monospace;font-size:24px;color:#6B5443">38</p>
+<aside>Cada métrica corresponde a un objetivo del embudo: alcance para darnos a conocer, comunidad para crecer, interacción para medir si el contenido gusta y conversión para saber si la gente llegó al local. Son metas propuestas, no resultados.</aside>
+</section>
+<section class="slide" id="cierre" data-transition="fade" style="background:#24170F;color:#F4EBDD;font-family:'DM Sans', Arial, sans-serif;padding:128px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px">
+<div style="position:absolute;left:0;top:0;width:1920px;height:1080px;background:radial-gradient(circle at 50% 45%, #3A2619 0%, #24170F 60%)"></div>
+<svg aria-label="Isotipo de Rollback" viewBox="0 0 120 120" width="120" height="120" style="width:160px;height:160px" xmlns="http://www.w3.org/2000/svg"><g transform="translate(40 2) scale(1.5)" fill="none" stroke="#34D27B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></g><path d="M26 50H90V74Q90 98 66 98H50Q26 98 26 74Z" fill="#F4EBDD"/><path d="M90 58Q106 58 106 70Q106 82 90 82" fill="none" stroke="#F4EBDD" stroke-width="7" stroke-linecap="round"/><path d="M18 108H98" stroke="#F4EBDD" stroke-width="6" stroke-linecap="round"/></svg>
+<h1 style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:120px;font-weight:800;letter-spacing:-3px;line-height:1;text-align:center">gracias<span style="color:#34D27B">_</span></h1>
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:32px;color:#BFAE98;text-align:center"><span style="color:#34D27B">$</span> git commit -m "gracias por su atención"</p>
+<p style="font-family:'Caveat', cursive;font-size:72px;font-weight:600;color:#E09A3E;text-align:center">Si el día falla, haz rollback.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;text-align:center;font-size:24px;color:#BFAE98">Ivifer Pita · Proyecto de branding · Octubre 2026</p>
+<aside>Cierre. Agradecer y abrir espacio para preguntas.</aside>
+</section>
+</div>
+<div id="notes"></div>
+<div id="ui" role="toolbar" aria-label="Controles de la presentación">
+<button id="prev" aria-label="Lámina anterior">←</button>
+<span class="n" id="count">1 / 1</span>
+<button id="next" aria-label="Lámina siguiente">→</button>
+<button id="nbtn" aria-label="Notas del orador">notas</button>
+<button id="fs" aria-label="Pantalla completa">⛶</button>
+</div>
+<script>
+(function(){
+var stage=document.getElementById('stage'),slides=[].slice.call(document.querySelectorAll('.slide')),cur=-1;
+var count=document.getElementById('count'),bar=document.getElementById('bar'),notes=document.getElementById('notes');
+function fit(){var s=Math.min(innerWidth/1920,innerHeight/1080);stage.style.transform='translate(-50%,-50%) scale('+s+')'}
+addEventListener('resize',fit);fit();
+slides.forEach(function(s){s.querySelectorAll('[data-build-in]').forEach(function(e){e.classList.add('bi')})});
+function leave(s){
+  s.querySelectorAll('video').forEach(function(v){v.pause()});
+  s.querySelectorAll('iframe.emb').forEach(function(f){f.removeAttribute('srcdoc')});
+  s.classList.remove('on','push');
+}
+function enter(s,push){
+  s.classList.add('on');if(push)s.classList.add('push');
+  s.querySelectorAll('iframe.emb').forEach(function(f){f.srcdoc=f.getAttribute('data-src')});
+  s.querySelectorAll('video').forEach(function(v){v.currentTime=0;v.muted=false;var p=v.play();if(p)p.catch(function(){v.muted=true;v.play()})});
+}
+function go(n){
+  n=Math.max(0,Math.min(slides.length-1,n));if(n===cur)return;
+  var push=false;
+  if(cur>=0){push=slides[n].getAttribute('data-transition')==='push';leave(slides[cur])}
+  cur=n;enter(slides[n],push);
+  count.textContent=(n+1)+' / '+slides.length;
+  bar.style.width=((n+1)/slides.length*100)+'%';
+  var a=slides[n].querySelector('aside');notes.textContent=a?a.textContent:'';
+  if(location.hash!=='#'+(n+1))history.replaceState(null,'','#'+(n+1));
+}
+function fromHash(){var m=/^#(\d+)$/.exec(location.hash);return m?parseInt(m[1],10)-1:0}
+addEventListener('hashchange',function(){go(fromHash())});
+document.getElementById('prev').onclick=function(e){e.stopPropagation();go(cur-1)};
+document.getElementById('next').onclick=function(e){e.stopPropagation();go(cur+1)};
+document.getElementById('nbtn').onclick=function(e){e.stopPropagation();document.body.classList.toggle('shownotes')};
+function fs(){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen()}
+document.getElementById('fs').onclick=function(e){e.stopPropagation();fs()};
+addEventListener('keydown',function(e){
+  var k=e.key;
+  if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();go(cur+1)}
+  else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();go(cur-1)}
+  else if(k==='Home')go(0);else if(k==='End')go(slides.length-1);
+  else if(k==='f'||k==='F')fs();else if(k==='n'||k==='N')document.body.classList.toggle('shownotes');
+});
+stage.addEventListener('click',function(e){
+  var v=e.target.closest('video');
+  if(v){v.paused?v.play():v.pause();return}
+  if(e.target.closest('a'))return;
+  go(e.clientX<innerWidth*0.25?cur-1:cur+1);
+});
+var sx=null;
+addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(dx<0?cur+1:cur-1);sx=null});
+var idle;function wake(){document.body.classList.remove('idle');clearTimeout(idle);idle=setTimeout(function(){document.body.classList.add('idle')},2500)}
+addEventListener('mousemove',wake);addEventListener('keydown',wake);wake();
+document.fonts.ready.then(function(){go(fromHash())});
+})();
+</script>
+</body>
+</html>
